@@ -1,12 +1,18 @@
+// General JavaScript functions
+
+// Page switching functionality
 function switchPage(page) {
+    // Remove active class from all pages and nav buttons
     document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
     
+    // Add active class to selected page
     const targetPage = document.getElementById(page + 'Page');
     if (targetPage) {
         targetPage.classList.add('active');
     }
-
+    
+    // Update active nav button
     const navButtons = document.querySelectorAll('.nav-btn');
     if (page === 'calculator' && navButtons[0]) {
         navButtons[0].classList.add('active');
@@ -21,13 +27,16 @@ function switchPage(page) {
     } else if (page === 'codes' && navButtons[5]) {
         navButtons[5].classList.add('active');
     }
-
+    
+    // Close sidebar after selection
     closeSidebar();
 }
 
+// Sidebar functionality
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
+    
     if (sidebar && overlay) {
         sidebar.classList.toggle('open');
         overlay.classList.toggle('show');
@@ -37,33 +46,91 @@ function toggleMobileMenu() {
 function closeSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
+    
     if (sidebar && overlay) {
         sidebar.classList.remove('open');
         overlay.classList.remove('show');
     }
 }
 
-function toggleSettings(id) {
-    document.getElementById(id).classList.toggle('show');
+// Toggle settings panel (universal)
+function toggleSettings(panelId) {
+    const panel = document.getElementById(panelId);
+    if (panel) {
+        panel.classList.toggle('show');
+    }
 }
 
-function calculateStats(inputId, resultId, errorId, sectionId) {
-    const input = document.getElementById(inputId);
-    const resultSection = document.getElementById(sectionId);
-    const resultValue = document.getElementById(resultId);
-    const errorMessage = document.getElementById(errorId);
+// Initialize functions when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Make sure calculator page is active by default
+    switchPage('calculator');
     
-    errorMessage.textContent = '';
-    const inputValue = parseFloat(input.value);
-    if (isNaN(inputValue) || input.value.trim() === '') {
-        errorMessage.textContent = 'Please enter a valid number';
-        resultSection.classList.remove('show');
-        return;
-    }
-    const result = inputValue * (typeof currentMultiplier !== 'undefined' ? currentMultiplier : 1);
-    resultValue.textContent = result.toLocaleString('uk-UA', { 
-        minimumFractionDigits: result % 1 === 0 ? 0 : 2, 
-        maximumFractionDigits: 8 
+    // Click outside settings panel to close
+    document.addEventListener('click', e => {
+        document.querySelectorAll('.settings-panel').forEach(panel => {
+            const settingsBtn = panel.closest('.page')?.querySelector('.settings-btn');
+            if (settingsBtn && !panel.contains(e.target) && !settingsBtn.contains(e.target)) {
+                panel.classList.remove('show');
+            }
+        });
     });
-    resultSection.classList.add('show');
-}
+
+    // Initialize calculator functions
+    if (typeof initializeCalculator === 'function') {
+        initializeCalculator();
+    }
+
+    // Initialize arm calculator
+    if (typeof initializeArm === 'function') {
+        initializeArm();
+    }
+
+    // Initialize boosts
+    if (typeof initializeBoosts === 'function') {
+        initializeBoosts();
+    }
+
+    // Initialize shiny stats
+    if (typeof initializeShiny === 'function') {
+        initializeShiny();
+    }
+
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
+});
+
+// Compatibility timeout for initialization
+setTimeout(() => {
+    // Make sure calculator page is active by default
+    if (!document.querySelector('.page.active')) {
+        switchPage('calculator');
+    }
+    
+    // Initialize calculator functions
+    if (typeof initializeCalculator === 'function') {
+        initializeCalculator();
+    }
+
+    // Initialize arm calculator
+    if (typeof initializeArm === 'function') {
+        initializeArm();
+    }
+
+    // Initialize boosts
+    if (typeof initializeBoosts === 'function') {
+        initializeBoosts();
+    }
+
+    // Initialize shiny stats
+    if (typeof initializeShiny === 'function') {
+        initializeShiny();
+    }
+
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
+}, 100);
