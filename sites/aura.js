@@ -3,7 +3,7 @@
 // Aura data
 const auraData = [
     { name: "brainrot", description: "Legendary aura with incredible power boost", rarity: "legendary" },
-    { name: "Shadow Walker", description: "Move silently through the darkness with enhanced stealth", rarity: "epic" },
+    { name: "Dark Matter Aura", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
     { name: "Fire Storm", description: "Surround yourself with blazing flames that damage enemies", rarity: "rare" },
     { name: "Ice Shield", description: "Create a protective barrier of ice around yourself", rarity: "rare" },
     { name: "Lightning Strike", description: "Channel electricity to deal massive damage", rarity: "epic" },
