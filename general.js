@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Закриваємо панелі налаштувань при кліку поза ними
         const settingsPanels = [
             { panel: document.getElementById('settingsPanel'), btn: document.querySelector('#calculatorPage .settings-btn') },
+            { panel: document.getElementById('settingsPanelArm'), btn: document.querySelector('#armPage .settings-btn') },
             { panel: document.getElementById('settingsPanelGrind'), btn: document.querySelector('#grindPage .settings-btn') }
         ];
         
