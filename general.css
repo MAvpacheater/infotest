@@ -27,6 +27,15 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Page Management */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
     position: fixed;
