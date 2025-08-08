@@ -1,11 +1,11 @@
 /* Calculator Page Styles */
 
 .calculator-page {
-    display: none;
+    display: none !important;
 }
 
 .calculator-page.active {
-    display: block;
+    display: block !important;
 }
 
 .calculator-page h1 {
