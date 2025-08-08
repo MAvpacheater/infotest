@@ -1,9 +1,6 @@
 // Arm Stats Calculator functionality
 
-// Константа для базового множника рук
-const armBaseMultiplier = 2.1;
-
-// Множники для golden рівнів
+// Множники для golden рівнів (без базового множника)
 const goldenModifiers = {
     golden1: 1.5,      // 1/5 golden
     golden2: 1.65,     // 2/5 golden (1.5 * 1.1)
@@ -12,7 +9,7 @@ const goldenModifiers = {
     golden5: 2.1       // 5/5 golden
 };
 
-let armMultiplier = armBaseMultiplier;
+let armMultiplier = 1;
 
 // Показ/приховування налаштувань для калькулятора рук
 function toggleArmSettings() {
@@ -41,13 +38,13 @@ function handleGoldenSelection(selectedId) {
 
 // Оновлення множника для калькулятора рук
 function updateArmMultiplier() {
-    armMultiplier = armBaseMultiplier;
+    armMultiplier = 1; // Базовий множник тепер 1
     
     // Перевіряємо який golden рівень активний
     for (const id in goldenModifiers) {
         const checkbox = document.getElementById(id);
         if (checkbox && checkbox.checked) {
-            armMultiplier *= goldenModifiers[id];
+            armMultiplier = goldenModifiers[id]; // Використовуємо тільки golden множник
             break; // Тільки один golden може бути активним
         }
     }
@@ -89,6 +86,12 @@ function calculateArmStats() {
 
 // Ініціалізація калькулятора рук при завантаженні сторінки
 function initializeArm() {
+    // Встановлюємо 5/5 golden за замовчуванням
+    const golden5Checkbox = document.getElementById('golden5');
+    if (golden5Checkbox) {
+        golden5Checkbox.checked = true;
+    }
+    
     updateArmMultiplier();
     
     const armNumberInput = document.getElementById('armNumberInput');
