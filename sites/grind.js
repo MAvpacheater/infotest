@@ -19,6 +19,7 @@ function toggleGrindSettings() {
     }
 }
 
+
 // Оновлення множника при зміні чекбоксів
 function updateGrindMultiplier() {
     grindMultiplier = 1;
