@@ -3,23 +3,23 @@
 // Trainer data
 const trainerData = {
     free: [
-        { name: "Basic Trainer", description: "Provides 10% training speed boost and 5% strength increase", type: "free" },
-        { name: "Rookie Coach", description: "Gives 15% training speed and 8% luck enhancement", type: "free" },
-        { name: "Fitness Instructor", description: "Offers 12% training speed and 10% stamina boost", type: "free" },
-        { name: "Gym Buddy", description: "Provides 8% training speed and 12% motivation increase", type: "free" },
-        { name: "Community Trainer", description: "Gives 20% training speed but only during events", type: "free" },
-        { name: "Volunteer Coach", description: "Offers 18% training speed and 6% overall stats boost", type: "free" },
-        { name: "Student Mentor", description: "Provides 14% training speed and 9% experience gain", type: "free" }
+        { name: "Basic Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Rookie Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Fitness Instructor", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Gym Buddy", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Community Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Volunteer Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
+        { name: "Student Mentor", description: "420% Strength -- 162% luck -- 177% wins", type: "free" }
     ],
     donate: [
-        { name: "Elite Master", description: "Provides 45% training speed boost and 25% strength increase", type: "donate" },
-        { name: "Pro Champion", description: "Gives 50% training speed and 30% luck enhancement", type: "donate" },
-        { name: "Legendary Coach", description: "Offers 55% training speed and 35% all stats boost", type: "donate" },
-        { name: "Supreme Trainer", description: "Provides 60% training speed and 40% experience multiplier", type: "donate" },
-        { name: "Diamond Instructor", description: "Gives 65% training speed and 45% combat effectiveness", type: "donate" },
-        { name: "Platinum Mentor", description: "Offers 70% training speed and 50% overall performance", type: "donate" },
-        { name: "Ultimate Guru", description: "Provides 80% training speed and 60% all abilities enhancement", type: "donate" },
-        { name: "Godlike Sensei", description: "Gives 100% training speed and 80% legendary boost to everything", type: "donate" }
+        { name: "Manager guard", description: "280%/420% Strength -- 108%/162% luck -- 118%/177% wins, type: "donate" },
+        { name: "Shrine Master", description: "230%/345% Strength -- 77%/115.5% luck -- 85%/127.5% wins", type: "donate" },
+        { name: "Legendary Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
+        { name: "Supreme Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
+        { name: "Diamond Instructor", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
+        { name: "Platinum Mentor", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
+        { name: "Ultimate Guru", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
+        { name: "Godlike Sensei", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" }
     ]
 };
 
