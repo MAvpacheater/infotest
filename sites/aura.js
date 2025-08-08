@@ -2,21 +2,21 @@
 
 // Aura data
 const auraData = [
-    { name: "brainrot", description: "Legendary aura with incredible power boost", rarity: "legendary" },
-    { name: "Dark Matter Aura", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
-    { name: "Fire Storm", description: "Surround yourself with blazing flames that damage enemies", rarity: "rare" },
-    { name: "Ice Shield", description: "Create a protective barrier of ice around yourself", rarity: "rare" },
-    { name: "Lightning Strike", description: "Channel electricity to deal massive damage", rarity: "epic" },
-    { name: "Healing Light", description: "Emit a gentle glow that restores health over time", rarity: "common" },
-    { name: "Wind Runner", description: "Increase movement speed and agility dramatically", rarity: "rare" },
-    { name: "Earth Guardian", description: "Gain incredible defensive capabilities and durability", rarity: "epic" },
-    { name: "Mystic Vision", description: "See hidden objects and enemies through walls", rarity: "legendary" },
-    { name: "Time Warp", description: "Slow down time around you for strategic advantage", rarity: "mythic" },
-    { name: "Soul Drain", description: "Absorb energy from defeated enemies to grow stronger", rarity: "legendary" },
-    { name: "Phoenix Rising", description: "Resurrect automatically when defeated with full health", rarity: "mythic" },
-    { name: "Crystal Armor", description: "Crystalline protection that reflects damage back to attackers", rarity: "epic" },
-    { name: "Void Touch", description: "Consume matter and energy to fuel your abilities", rarity: "legendary" },
-    { name: "Nature's Blessing", description: "Gain support from natural elements and creatures", rarity: "rare" }
+    { name: "brainrot", description: "Gives you 200% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Dark Matter Aura [1/30m]", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Corrupted Aura [1/20m", description: "Gives you 192% strength, 108% luck and 40% training speed", rarity: "common" },
+    { name: "Ice Shield", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "rare" },
+    { name: "Lightning Strike", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "epic" },
+    { name: "Healing Light", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "common" },
+    { name: "Wind Runner", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "rare" },
+    { name: "Earth Guardian", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "epic" },
+    { name: "Mystic Vision", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Time Warp", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "mythic" },
+    { name: "Soul Drain", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Phoenix Rising", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "mythic" },
+    { name: "Crystal Armor", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "epic" },
+    { name: "Void Touch", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Nature's Blessing", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "rare" }
 ];
 
 // Generate aura content
