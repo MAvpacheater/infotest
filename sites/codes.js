@@ -62,15 +62,11 @@ async function copyCode(code, button) {
     try {
         await navigator.clipboard.writeText(code);
         
-        // Visual feedback on button
         const originalText = button.innerHTML;
         button.innerHTML = '<span class="copy-icon">✓</span> Copied!';
         button.classList.add('copied');
-        
-        // Show success message
         showCopyMessage(`Code "${code}" copied!`);
         
-        // Reset button after animation
         setTimeout(() => {
             button.innerHTML = originalText;
             button.classList.remove('copied');
@@ -79,7 +75,6 @@ async function copyCode(code, button) {
     } catch (err) {
         console.error('Failed to copy code:', err);
         
-        // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = code;
         textArea.style.position = 'fixed';
@@ -92,12 +87,9 @@ async function copyCode(code, button) {
         try {
             document.execCommand('copy');
             showCopyMessage(`Code "${code}" copied!`);
-            
-            // Visual feedback on button
             const originalText = button.innerHTML;
             button.innerHTML = '<span class="copy-icon">✓</span> Copied!';
             button.classList.add('copied');
-            
             setTimeout(() => {
                 button.innerHTML = originalText;
                 button.classList.remove('copied');
@@ -124,8 +116,6 @@ function showCopyMessage(message) {
     
     messageEl.textContent = message;
     messageEl.classList.add('show');
-    
-    // Remove message after animation
     setTimeout(() => {
         messageEl.classList.remove('show');
     }, 2000);
@@ -138,14 +128,11 @@ function generateCodesContent() {
         console.error('Element with ID "codesContainer" not found');
         return;
     }
-    
-    // Clear existing content
     container.innerHTML = '';
     
-    codesData.forEach((item, index) => {
+    codesData.forEach(item => {
         const codeItem = document.createElement('div');
         codeItem.className = 'code-item';
-        
         codeItem.innerHTML = `
             <div class="code-content">
                 <div class="code-name">${item.code}</div>
@@ -156,12 +143,20 @@ function generateCodesContent() {
                 Copy
             </button>
         `;
-        
         container.appendChild(codeItem);
     });
 }
 
 // Initialize codes
 function initializeCodes() {
+    // Показуємо сторінку кодів
+    const codesPage = document.querySelector(".codes-page");
+    if (codesPage) {
+        codesPage.classList.add("active");
+    }
+
     generateCodesContent();
 }
+
+// Запускаємо після завантаження DOM
+document.addEventListener("DOMContentLoaded", initializeCodes);
