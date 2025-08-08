@@ -1,7 +1,60 @@
 // Arm Stats Calculator functionality
 
-// Константа для множника рук
-const armMultiplier = 136.11;
+// Константа для базового множника рук
+const armBaseMultiplier = 136.11;
+
+// Множники для golden рівнів
+const goldenModifiers = {
+    golden1: 1.5,      // 1/5 golden
+    golden2: 1.65,     // 2/5 golden (1.5 * 1.1)
+    golden3: 1.8,      // 3/5 golden (1.65 * 1.0909)
+    golden4: 1.95,     // 4/5 golden (1.8 * 1.0833)
+    golden5: 2.1       // 5/5 golden
+};
+
+let armMultiplier = armBaseMultiplier;
+
+// Показ/приховування налаштувань для калькулятора рук
+function toggleArmSettings() {
+    const panel = document.getElementById('settingsPanelArm');
+    if (panel) {
+        panel.classList.toggle('show');
+    }
+}
+
+// Обробка вибору golden рівнів (тільки один може бути активним)
+function handleGoldenSelection(selectedId) {
+    const goldenIds = ['golden1', 'golden2', 'golden3', 'golden4', 'golden5'];
+    
+    // Вимикаємо всі інші golden рівні
+    goldenIds.forEach(id => {
+        if (id !== selectedId) {
+            const checkbox = document.getElementById(id);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        }
+    });
+    
+    updateArmMultiplier();
+}
+
+// Оновлення множника для калькулятора рук
+function updateArmMultiplier() {
+    armMultiplier = armBaseMultiplier;
+    
+    // Перевіряємо який golden рівень активний
+    for (const id in goldenModifiers) {
+        const checkbox = document.getElementById(id);
+        if (checkbox && checkbox.checked) {
+            armMultiplier *= goldenModifiers[id];
+            break; // Тільки один golden може бути активним
+        }
+    }
+    
+    // Автоматично перерахувати результат після оновлення множника
+    calculateArmStats();
+}
 
 // Розрахунок результату для рук
 function calculateArmStats() {
@@ -36,6 +89,8 @@ function calculateArmStats() {
 
 // Ініціалізація калькулятора рук при завантаженні сторінки
 function initializeArm() {
+    updateArmMultiplier();
+    
     const armNumberInput = document.getElementById('armNumberInput');
     if (armNumberInput) {
         armNumberInput.addEventListener('keypress', e => {
@@ -47,8 +102,6 @@ function initializeArm() {
         armNumberInput.addEventListener('input', () => {
             const errorMessage = document.getElementById('armErrorMessage');
             if (errorMessage) errorMessage.textContent = '';
-            // Автоматично перерахувати при введенні
-            calculateArmStats();
         });
     }
 }
