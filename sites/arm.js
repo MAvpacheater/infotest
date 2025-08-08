@@ -1,7 +1,7 @@
 // Arm Stats Calculator functionality
 
 // Константа для базового множника рук
-const armBaseMultiplier = 136.11;
+const armBaseMultiplier = 2.1;
 
 // Множники для golden рівнів
 const goldenModifiers = {
