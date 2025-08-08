@@ -12,19 +12,20 @@ function switchPage(page) {
         targetPage.classList.add('active');
     }
     
-
     // Update active nav button
     const navButtons = document.querySelectorAll('.nav-btn');
     if (page === 'calculator' && navButtons[0]) {
         navButtons[0].classList.add('active');
     } else if (page === 'arm' && navButtons[1]) {
         navButtons[1].classList.add('active');
-    } else if (page === 'boosts' && navButtons[2]) {
+    } else if (page === 'grind' && navButtons[2]) {
         navButtons[2].classList.add('active');
-    } else if (page === 'shiny' && navButtons[3]) {
+    } else if (page === 'boosts' && navButtons[3]) {
         navButtons[3].classList.add('active');
-    } else if (page === 'codes' && navButtons[4]) {
+    } else if (page === 'shiny' && navButtons[4]) {
         navButtons[4].classList.add('active');
+    } else if (page === 'codes' && navButtons[5]) {
+        navButtons[5].classList.add('active');
     }
     
     // Close sidebar after selection
@@ -59,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Click outside settings panel to close
     document.addEventListener('click', e => {
-        const settingsPanel = document.getElementById('settingsPanel');
-        const settingsBtn = document.querySelector('.settings-btn');
         // Закриваємо панелі налаштувань при кліку поза ними
         const settingsPanels = [
             { panel: document.getElementById('settingsPanel'), btn: document.querySelector('#calculatorPage .settings-btn') },
@@ -74,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    });
 
     // Initialize calculator functions
     if (typeof initializeCalculator === 'function') {
@@ -85,6 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeArm();
     }
 
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
+
     // Initialize boosts
     if (typeof initializeBoosts === 'function') {
         initializeBoosts();
@@ -93,11 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize shiny stats
     if (typeof initializeShiny === 'function') {
         initializeShiny();
-    }
-
-    // Initialize grind calculator
-    if (typeof initializeGrind === 'function') {
-        initializeGrind();
     }
 });
 
@@ -118,6 +118,11 @@ setTimeout(() => {
         initializeArm();
     }
 
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
+
     // Initialize boosts
     if (typeof initializeBoosts === 'function') {
         initializeBoosts();
@@ -126,10 +131,5 @@ setTimeout(() => {
     // Initialize shiny stats
     if (typeof initializeShiny === 'function') {
         initializeShiny();
-    }
-
-    // Initialize grind calculator
-    if (typeof initializeGrind === 'function') {
-        initializeGrind();
     }
 }, 100);
