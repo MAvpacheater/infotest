@@ -10,20 +10,16 @@ const modifiersGrind = {
 
 let currentMultiplier = 1;
 
-// Toggle settings panel (передаємо id)
-function toggleSettings(panelId) {
-    const panel = document.getElementById(panelId);
-    if (panel) {
-        panel.classList.toggle('show');
-    }
+// Toggle settings panel
+function toggleSettings() {
+    document.getElementById('settingsPanel').classList.toggle('show');
 }
 
 // Update multiplier based on selected checkboxes
 function updateMultiplierGrind() {
     currentMultiplier = 1;
     for (const mod in modifiersGrind) {
-        const checkbox = document.getElementById(mod);
-        if (checkbox && checkbox.checked) {
+        if (document.getElementById(mod).checked) {
             currentMultiplier *= modifiersGrind[mod];
         }
     }
@@ -31,10 +27,10 @@ function updateMultiplierGrind() {
 
 // Calculate stats function
 function calculateGrindStats() {
-    const input = document.getElementById('numberInputGrind');
-    const resultSection = document.getElementById('resultSectionGrind');
-    const resultValue = document.getElementById('resultValueGrind');
-    const errorMessage = document.getElementById('errorMessageGrind');
+    const input = document.getElementById('numberInput');
+    const resultSection = document.getElementById('resultSection');
+    const resultValue = document.getElementById('resultValue');
+    const errorMessage = document.getElementById('errorMessage');
     
     errorMessage.textContent = '';
     const inputValue = parseFloat(input.value);
@@ -57,14 +53,14 @@ function calculateGrindStats() {
 function initializeGrind() {
     updateMultiplierGrind();
     
-    const numberInput = document.getElementById('numberInputGrind');
+    const numberInput = document.getElementById('numberInput');
     if (numberInput) {
         numberInput.addEventListener('keypress', e => {
             if (e.key === 'Enter') calculateGrindStats();
         });
         
         numberInput.addEventListener('input', () => {
-            const errorMessage = document.getElementById('errorMessageGrind');
+            const errorMessage = document.getElementById('errorMessage');
             if (errorMessage) {
                 errorMessage.textContent = '';
             }
