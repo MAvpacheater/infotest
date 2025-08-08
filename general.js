@@ -1,43 +1,36 @@
-// General JavaScript functions
-
-// Page switching functionality
+// ----------------------
+// Page switching
+// ----------------------
 function switchPage(page) {
-    // Remove active class from all pages and nav buttons
+    // Приховуємо всі сторінки
     document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+
+    // Прибираємо активні стани з усіх кнопок
     document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-    
-    // Add active class to selected page
-    const targetPage = document.getElementById(page + 'Page');
+
+    // Показуємо потрібну сторінку
+    const targetPage = document.getElementById(`${page}Page`);
     if (targetPage) {
         targetPage.classList.add('active');
     }
-    
 
-    // Update active nav button
-    const navButtons = document.querySelectorAll('.nav-btn');
-    if (page === 'calculator' && navButtons[0]) {
-        navButtons[0].classList.add('active');
-    } else if (page === 'arm' && navButtons[1]) {
-        navButtons[1].classList.add('active');
-    } else if (page === 'grind' && navButtons[2]) {
-        navButtons[1].classList.add('active');
-    } else if (page === 'boosts' && navButtons[3]) {
-        navButtons[2].classList.add('active');
-    } else if (page === 'shiny' && navButtons[4]) {
-        navButtons[3].classList.add('active');
-    } else if (page === 'codes' && navButtons[5]) {
-        navButtons[4].classList.add('active');
+    // Підсвічуємо відповідну кнопку
+    const targetBtn = document.querySelector(`.nav-btn[onclick="switchPage('${page}')"]`);
+    if (targetBtn) {
+        targetBtn.classList.add('active');
     }
-    
-    // Close sidebar after selection
+
+    // Закриваємо сайдбар
     closeSidebar();
 }
 
-// Sidebar functionality
+// ----------------------
+// Sidebar
+// ----------------------
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    
+
     if (sidebar && overlay) {
         sidebar.classList.toggle('open');
         overlay.classList.toggle('show');
@@ -47,19 +40,46 @@ function toggleMobileMenu() {
 function closeSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebarOverlay');
-    
+
     if (sidebar && overlay) {
         sidebar.classList.remove('open');
         overlay.classList.remove('show');
     }
 }
 
-// Initialize functions when page loads
+// ----------------------
+// Settings panel toggle
+// ----------------------
+function toggleSettings() {
+    const panel = document.getElementById('settingsPanel');
+    if (panel) {
+        panel.classList.toggle('show');
+    }
+}
+
+// ----------------------
+// Ініціалізація сторінок
+// ----------------------
+function initializeAll() {
+    // За замовчуванням калькулятор
+    if (!document.querySelector('.page.active')) {
+        switchPage('calculator');
+    }
+
+    // Ініціалізація всіх модулів, якщо вони є
+    if (typeof initializeCalculator === 'function') initializeCalculator();
+    if (typeof initializeArm === 'function') initializeArm();
+    if (typeof initializeBoosts === 'function') initializeBoosts();
+    if (typeof initializeShiny === 'function') initializeShiny();
+}
+
+// ----------------------
+// Events
+// ----------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // Make sure calculator page is active by default
     switchPage('calculator');
-    
-    // Click outside settings panel to close
+
+    // Закриття налаштувань кліком поза панеллю
     document.addEventListener('click', e => {
         const settingsPanel = document.getElementById('settingsPanel');
         const settingsBtn = document.querySelector('.settings-btn');
@@ -70,51 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initialize calculator functions
-    if (typeof initializeCalculator === 'function') {
-        initializeCalculator();
-    }
-
-    // Initialize arm calculator
-    if (typeof initializeArm === 'function') {
-        initializeArm();
-    }
-
-    // Initialize boosts
-    if (typeof initializeBoosts === 'function') {
-        initializeBoosts();
-    }
-
-    // Initialize shiny stats
-    if (typeof initializeShiny === 'function') {
-        initializeShiny();
-    }
+    initializeAll();
 });
 
-// Compatibility timeout for initialization
-setTimeout(() => {
-    // Make sure calculator page is active by default
-    if (!document.querySelector('.page.active')) {
-        switchPage('calculator');
-    }
-    
-    // Initialize calculator functions
-    if (typeof initializeCalculator === 'function') {
-        initializeCalculator();
-    }
-
-    // Initialize arm calculator
-    if (typeof initializeArm === 'function') {
-        initializeArm();
-    }
-
-    // Initialize boosts
-    if (typeof initializeBoosts === 'function') {
-        initializeBoosts();
-    }
-
-    // Initialize shiny stats
-    if (typeof initializeShiny === 'function') {
-        initializeShiny();
-    }
-}, 100);
+// Резервна ініціалізація (на випадок затримки завантаження)
+setTimeout(initializeAll, 100);
