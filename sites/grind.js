@@ -8,7 +8,7 @@ const modifiersGrind = {
     ench_coockie: 1.07
 };
 
-let currentMultiplier = 1;
+let currentMultiplierGrind = 1;
 
 // Toggle settings panel
 function toggleSettings() {
@@ -17,20 +17,20 @@ function toggleSettings() {
 
 // Update multiplier based on selected checkboxes
 function updateMultiplierGrind() {
-    currentMultiplier = 1;
+    currentMultiplierGrind = 1;
     for (const mod in modifiersGrind) {
         if (document.getElementById(mod).checked) {
-            currentMultiplier *= modifiersGrind[mod];
+            currentMultiplierGrind *= modifiersGrind[mod];
         }
     }
 }
 
-// Calculate stats function
+// Calculate grind stats
 function calculateGrindStats() {
-    const input = document.getElementById('numberInput');
-    const resultSection = document.getElementById('resultSection');
-    const resultValue = document.getElementById('resultValue');
-    const errorMessage = document.getElementById('errorMessage');
+    const input = document.getElementById('numberInputGrind');
+    const resultSection = document.getElementById('resultSectionGrind');
+    const resultValue = document.getElementById('resultValueGrind');
+    const errorMessage = document.getElementById('errorMessageGrind');
     
     errorMessage.textContent = '';
     const inputValue = parseFloat(input.value);
@@ -41,7 +41,7 @@ function calculateGrindStats() {
         return;
     }
     
-    const result = inputValue * currentMultiplier;
+    const result = inputValue * currentMultiplierGrind;
     resultValue.textContent = result.toLocaleString('uk-UA', { 
         minimumFractionDigits: result % 1 === 0 ? 0 : 2, 
         maximumFractionDigits: 8 
@@ -49,18 +49,18 @@ function calculateGrindStats() {
     resultSection.classList.add('show');
 }
 
-// Initialize calculator
+// Initialize grind calculator
 function initializeGrind() {
     updateMultiplierGrind();
     
-    const numberInput = document.getElementById('numberInput');
+    const numberInput = document.getElementById('numberInputGrind');
     if (numberInput) {
         numberInput.addEventListener('keypress', e => {
             if (e.key === 'Enter') calculateGrindStats();
         });
         
         numberInput.addEventListener('input', () => {
-            const errorMessage = document.getElementById('errorMessage');
+            const errorMessage = document.getElementById('errorMessageGrind');
             if (errorMessage) {
                 errorMessage.textContent = '';
             }
