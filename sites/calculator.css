@@ -1,5 +1,13 @@
 /* Calculator Page Styles */
 
+.calculator-page {
+    display: none;
+}
+
+.calculator-page.active {
+    display: block;
+}
+
 .calculator-page h1 {
     color: #333;
     margin-bottom: 30px;
