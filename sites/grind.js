@@ -8,7 +8,8 @@ const grindModifiers = {
     chocolate_donut: 1.15,
     ench_cookie: 1.07,
     time: 2.7,      // +170% = x2.7
-    friend: 3.518   // 8 раз по +15%: (1.15)^8 ≈ 3.518
+    member: 2.0,    // 2x
+    premium: 1.20   // 1.20x
 };
 
 let grindMultiplier = 1;
@@ -21,6 +22,23 @@ function toggleGrindSettings() {
     }
 }
 
+// Функція для обробки TP вибору (лише один з трьох)
+function handleTpSelection(selectedTp) {
+    const tpCheckboxes = ['tp1', 'tp2', 'tp3'];
+    
+    // Вимикаємо всі інші TP
+    tpCheckboxes.forEach(tp => {
+        if (tp !== selectedTp) {
+            const checkbox = document.getElementById(tp);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        }
+    });
+    
+    updateGrindMultiplier();
+}
+
 // Оновлення множника при зміні чекбоксів
 function updateGrindMultiplier() {
     grindMultiplier = 1;
@@ -30,6 +48,15 @@ function updateGrindMultiplier() {
             grindMultiplier *= grindModifiers[id];
         }
     }
+}
+
+// Функція для розрахунку Friend bonus (8 разів по +15%)
+function calculateFriendBonus(baseValue) {
+    let result = baseValue;
+    for (let i = 0; i < 8; i++) {
+        result = result * 1.15; // +15% кожен раз
+    }
+    return result;
 }
 
 // Розрахунок результату
@@ -51,7 +78,14 @@ function calculateGrindStats() {
         return;
     }
 
-    const finalValue = baseValue * grindMultiplier;
+    // Спочатку застосовуємо всі звичайні множники
+    let finalValue = baseValue * grindMultiplier;
+    
+    // Потім застосовуємо Friend bonus окремо, якщо він увімкнений
+    const friendCheckbox = document.getElementById('friend');
+    if (friendCheckbox && friendCheckbox.checked) {
+        finalValue = calculateFriendBonus(finalValue);
+    }
 
     resultValue.textContent = finalValue.toLocaleString('uk-UA', {
         minimumFractionDigits: finalValue % 1 === 0 ? 0 : 2,
