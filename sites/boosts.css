@@ -1,5 +1,13 @@
 /* Boosts Page Styles */
 
+.boosts-page {
+    display: none;
+}
+
+.boosts-page.active {
+    display: block;
+}
+
 .boosts-page .title {
     font-family: 'Orbitron', monospace;
     font-size: 2.5em;
@@ -108,11 +116,6 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, #667eea, transparent);
     margin: 10px 0;
-}
-
-/* Special styling for Christmas item */
-.boost-item:has(.boost-name:contains("Christmas")) {
-    background: linear-gradient(45deg, rgba(255, 0, 0, 0.1), rgba(0, 128, 0, 0.1));
 }
 
 /* Mobile Styles */
