@@ -61,59 +61,28 @@ const codesData = [
 async function copyCode(code, button) {
     try {
         await navigator.clipboard.writeText(code);
-        
         const originalText = button.innerHTML;
         button.innerHTML = '<span class="copy-icon">✓</span> Copied!';
         button.classList.add('copied');
         showCopyMessage(`Code "${code}" copied!`);
-        
         setTimeout(() => {
             button.innerHTML = originalText;
             button.classList.remove('copied');
         }, 1000);
-        
     } catch (err) {
         console.error('Failed to copy code:', err);
-        
-        const textArea = document.createElement('textarea');
-        textArea.value = code;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        
-        try {
-            document.execCommand('copy');
-            showCopyMessage(`Code "${code}" copied!`);
-            const originalText = button.innerHTML;
-            button.innerHTML = '<span class="copy-icon">✓</span> Copied!';
-            button.classList.add('copied');
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.classList.remove('copied');
-            }, 1000);
-        } catch (fallbackErr) {
-            console.error('Fallback copy also failed:', fallbackErr);
-            showCopyMessage('Failed to copy code');
-        }
-        
-        document.body.removeChild(textArea);
     }
 }
 
 // Show copy success message
 function showCopyMessage(message) {
     let messageEl = document.getElementById('copySuccessMessage');
-    
     if (!messageEl) {
         messageEl = document.createElement('div');
         messageEl.id = 'copySuccessMessage';
         messageEl.className = 'copy-success-message';
         document.body.appendChild(messageEl);
     }
-    
     messageEl.textContent = message;
     messageEl.classList.add('show');
     setTimeout(() => {
@@ -124,12 +93,8 @@ function showCopyMessage(message) {
 // Generate codes content
 function generateCodesContent() {
     const container = document.getElementById('codesContainer');
-    if (!container) {
-        console.error('Element with ID "codesContainer" not found');
-        return;
-    }
+    if (!container) return;
     container.innerHTML = '';
-    
     codesData.forEach(item => {
         const codeItem = document.createElement('div');
         codeItem.className = 'code-item';
@@ -147,16 +112,13 @@ function generateCodesContent() {
     });
 }
 
-// Initialize codes
-function initializeCodes() {
-    // Показуємо сторінку кодів
-    const codesPage = document.querySelector(".codes-page");
-    if (codesPage) {
-        codesPage.classList.add("active");
-    }
-
-    generateCodesContent();
-}
-
-// Запускаємо після завантаження DOM
-document.addEventListener("DOMContentLoaded", initializeCodes);
+// Відслідковуємо, коли користувач переходить на сторінку "codes"
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new MutationObserver(() => {
+        const codesPage = document.getElementById('codesPage');
+        if (codesPage && codesPage.classList.contains('active')) {
+            generateCodesContent();
+        }
+    });
+    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+});
