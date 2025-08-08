@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="sites/boosts.css">
     <link rel="stylesheet" href="sites/shiny.css">
     <link rel="stylesheet" href="sites/codes.css">
+    <link rel="stylesheet" href="sites/aura.css">
+    <link rel="stylesheet" href="sites/info.css">
 </head>
 
 <body>
@@ -35,6 +37,8 @@
         <button class="nav-btn" onclick="switchPage('boosts')">🚀 Boosts</button>
         <button class="nav-btn" onclick="switchPage('shiny')">✨ Shiny Stats</button>
         <button class="nav-btn" onclick="switchPage('codes')">🎁 Codes</button>
+        <button class="nav-btn" onclick="switchPage('aura')">🌟 Aura</button>
+        <button class="nav-btn" onclick="switchPage('info')">ℹ️ Info</button>
     </div>
 </div>
 
@@ -303,6 +307,20 @@
         
         <div class="codes-container" id="codesContainer"></div>
     </div>
+
+    <!-- Aura Page -->
+    <div class="page aura-page" id="auraPage">
+        <h1 class="title">Aura Collection</h1>
+        
+        <div class="aura-container" id="auraContainer"></div>
+    </div>
+
+    <!-- Info Page -->
+    <div class="page info-page" id="infoPage">
+        <h1 class="title">Game Information</h1>
+        
+        <div class="info-container" id="infoContainer"></div>
+    </div>
 </div>
 
 <div class="signature">Микола</div>
@@ -315,5 +333,7 @@
 <script src="sites/boosts.js"></script>
 <script src="sites/shiny.js"></script>
 <script src="sites/codes.js"></script>
+<script src="sites/aura.js"></script>
+<script src="sites/info.js"></script>
 </body>
 </html>
