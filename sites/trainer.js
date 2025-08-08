@@ -33,23 +33,40 @@ function switchTrainerType(type) {
     document.querySelectorAll('.trainer-switch-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    document.querySelector(`[data-type="${type}"]`).classList.add('active');
+    
+    const activeBtn = document.querySelector(`[data-type="${type}"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
     
     // Update sections
     document.querySelectorAll('.trainer-section').forEach(section => {
         section.classList.remove('active');
     });
-    document.getElementById(`${type}Trainers`).classList.add('active');
+    
+    const activeSection = document.getElementById(`${type}Trainers`);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
 }
 
 // Generate trainer content for a specific type
 function generateTrainerContent(type, containerId) {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) {
+        console.log(`Container ${containerId} not found`);
+        return;
+    }
     
     container.innerHTML = '';
     
-    trainerData[type].forEach(trainer => {
+    const trainers = trainerData[type];
+    if (!trainers) {
+        console.log(`No trainers found for type: ${type}`);
+        return;
+    }
+    
+    trainers.forEach(trainer => {
         const trainerItem = document.createElement('div');
         trainerItem.className = 'trainer-item';
         trainerItem.innerHTML = `
@@ -61,27 +78,55 @@ function generateTrainerContent(type, containerId) {
         `;
         container.appendChild(trainerItem);
     });
+    
+    console.log(`Generated ${trainers.length} trainers for ${type}`);
 }
 
 // Generate all trainer content
 function generateAllTrainerContent() {
+    console.log('Generating all trainer content...');
     generateTrainerContent('free', 'freeTrainers');
     generateTrainerContent('donate', 'donateTrainers');
 }
 
-// Initialize when page loads
+// Initialize trainer functionality
 function initializeTrainer() {
-    generateAllTrainerContent();
-    switchTrainerType('free');
+    console.log('Initializing trainer...');
+    
+    // Wait a bit for DOM to be ready
+    setTimeout(() => {
+        generateAllTrainerContent();
+        switchTrainerType('free');
+        console.log('Trainer initialization completed');
+    }, 100);
 }
 
-// Track when user switches to "trainer" page
-document.addEventListener("DOMContentLoaded", () => {
-    const observer = new MutationObserver(() => {
-        const trainerPage = document.getElementById('trainerPage');
-        if (trainerPage && trainerPage.classList.contains('active')) {
-            generateAllTrainerContent();
-        }
+// Make sure initializeTrainer runs when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTrainer);
+} else {
+    initializeTrainer();
+}
+
+// Also run when trainer page becomes active
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const trainerPage = document.getElementById('trainerPage');
+                if (trainerPage && trainerPage.classList.contains('active')) {
+                    console.log('Trainer page became active, regenerating content...');
+                    generateAllTrainerContent();
+                }
+            }
+        });
     });
-    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+    
+    const trainerPage = document.getElementById('trainerPage');
+    if (trainerPage) {
+        observer.observe(trainerPage, { attributes: true });
+    }
 });
+
+// Global function for window object (fallback)
+window.switchTrainerType = switchTrainerType;
