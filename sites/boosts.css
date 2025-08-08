@@ -1,11 +1,11 @@
 /* Boosts Page Styles */
 
 .boosts-page {
-    display: none;
+    display: none !important;
 }
 
 .boosts-page.active {
-    display: block;
+    display: block !important;
 }
 
 .boosts-page .title {
