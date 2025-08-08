@@ -175,21 +175,3 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
-/* Global Calculate Button Style */
-.calculate-btn {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #4facfe 0%, #7366ff 100%);
-    border: none;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.calculate-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(115, 102, 255, 0.4);
-}
