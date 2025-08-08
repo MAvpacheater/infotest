@@ -1,12 +1,12 @@
-// ==== GRIND CALCULATOR ====
+// Grind Calculator functionality
 
 // Множники для grind
 const grindModifiers = {
     tp1: 1.30,
     tp2: 1.60,
     tp3: 1.90,
-    chocholate_donut: 1.15,
-    ench_coockie: 1.07
+    chocolate_donut: 1.15,
+    ench_cookie: 1.07
 };
 
 let grindMultiplier = 1;
@@ -18,7 +18,6 @@ function toggleGrindSettings() {
         panel.classList.toggle('show');
     }
 }
-
 
 // Оновлення множника при зміні чекбоксів
 function updateGrindMultiplier() {
