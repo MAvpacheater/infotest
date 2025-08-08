@@ -9,11 +9,11 @@ const auraData = [
     { name: "Matrix [1/5m]", description: "Gives you 177% strength, 94% luck and 36% training speed", rarity: "epic" },
     { name: "Universe [1/1m]", description: "Gives you 153% strength, 81% luck and 32% training speed", rarity: "epic" },
     { name: "Storm [1/500k]", description: "Gives you 141% strength, 74% luck and 30% training speed", rarity: "rare" },
-    { name: "Earth Guardian", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "epic" },
+    { name: "Poison [1/150k]", description: "Gives you 130% strength, 65% luck and 28% training speed", rarity: "epic" },
     { name: "Mystic Vision", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
     { name: "Time Warp", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "mythic" },
     { name: "Soul Drain", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
-    { name: "Phoenix Rising", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "mythic" },
+    { name: "Lighting [1/1k]", description: "Gives you 58% strength, 38% luck and 16% training speed", rarity: "mythic" },
     { name: "Crystal Armor", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "epic" },
     { name: "Void Touch", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
     { name: "Nature's Blessing", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "rare" }
