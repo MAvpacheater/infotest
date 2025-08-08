@@ -1,4 +1,5 @@
-// Множники для розрахунків Grind
+// Grind calculator functionality
+
 const modifiersGrind = { 
     tp1: 1.30, 
     tp2: 1.60, 
@@ -9,7 +10,15 @@ const modifiersGrind = {
 
 let currentMultiplier = 1;
 
-// Оновлення множника на основі вибраних чекбоксів
+// Toggle settings panel (передаємо id)
+function toggleSettings(panelId) {
+    const panel = document.getElementById(panelId);
+    if (panel) {
+        panel.classList.toggle('show');
+    }
+}
+
+// Update multiplier based on selected checkboxes
 function updateMultiplierGrind() {
     currentMultiplier = 1;
     for (const mod in modifiersGrind) {
@@ -20,16 +29,40 @@ function updateMultiplierGrind() {
     }
 }
 
-// Ініціалізація Grind калькулятора
+// Calculate stats function
+function calculateGrindStats() {
+    const input = document.getElementById('numberInputGrind');
+    const resultSection = document.getElementById('resultSectionGrind');
+    const resultValue = document.getElementById('resultValueGrind');
+    const errorMessage = document.getElementById('errorMessageGrind');
+    
+    errorMessage.textContent = '';
+    const inputValue = parseFloat(input.value);
+    
+    if (isNaN(inputValue) || input.value.trim() === '') {
+        errorMessage.textContent = 'Please enter a valid number';
+        resultSection.classList.remove('show');
+        return;
+    }
+    
+    const result = inputValue * currentMultiplier;
+    resultValue.textContent = result.toLocaleString('uk-UA', { 
+        minimumFractionDigits: result % 1 === 0 ? 0 : 2, 
+        maximumFractionDigits: 8 
+    });
+    resultSection.classList.add('show');
+}
+
+// Initialize calculator
 function initializeGrind() {
     updateMultiplierGrind();
+    
     const numberInput = document.getElementById('numberInputGrind');
     if (numberInput) {
         numberInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') {
-                calculateStats('numberInputGrind','resultValueGrind','errorMessageGrind','resultSectionGrind');
-            }
+            if (e.key === 'Enter') calculateGrindStats();
         });
+        
         numberInput.addEventListener('input', () => {
             const errorMessage = document.getElementById('errorMessageGrind');
             if (errorMessage) {
