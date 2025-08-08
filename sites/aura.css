@@ -101,12 +101,12 @@
 }
 
 .aura-rarity.common {
-    background: rgba(156, 163, 175, 0.2);
+    background: rgba(110, 253, 110);
     color: #4b5563;
 }
 .aura-rarity.uncommon {
     background: rgba(239, 68, 68, 0.2);
-    color: #dc2626;
+    color: #46fd00;
 }
 .aura-rarity.rare {
     background: rgba(59, 130, 246, 0.2);
