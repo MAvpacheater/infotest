@@ -1,11 +1,11 @@
 /* Arm Calculator Page Styles */
 
 .arm-page {
-    display: none;
+    display: none !important;
 }
 
 .arm-page.active {
-    display: block;
+    display: block !important;
 }
 
 .arm-page h1 {
