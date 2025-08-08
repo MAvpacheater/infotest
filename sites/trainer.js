@@ -3,23 +3,43 @@
 // Trainer data
 const trainerData = {
     free: [
-        { name: "Basic Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Rookie Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Fitness Instructor", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Gym Buddy", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Community Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Volunteer Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "free" },
-        { name: "Student Mentor", description: "420% Strength -- 162% luck -- 177% wins", type: "free" }
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "free" }
     ],
     donate: [
-        { name: "Manager guard", description: "280%/420% Strength -- 108%/162% luck -- 118%/177% wins, type: "donate" },
+        { name: "Manager guard", description: "280%/420% Strength -- 108%/162% luck -- 118%/177% wins", type: "donate" },
         { name: "Shrine Master", description: "230%/345% Strength -- 77%/115.5% luck -- 85%/127.5% wins", type: "donate" },
-        { name: "Legendary Coach", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
-        { name: "Supreme Trainer", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
-        { name: "Diamond Instructor", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
-        { name: "Platinum Mentor", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
-        { name: "Ultimate Guru", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" },
-        { name: "Godlike Sensei", description: "420% Strength -- 162% luck -- 177% wins", type: "donate" }
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" },
+        { name: "1/???", description: "???% Strength -- ???% luck -- ???% wins", type: "donate" }
     ]
 };
 
