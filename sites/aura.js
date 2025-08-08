@@ -2,7 +2,7 @@
 
 // Aura data
 const auraData = [
-    { name: "brainrot", description: "Gives you 200% strength, 116% luck and 42% training speed", rarity: "legendary" },
+    { name: "Hacked [1/37.5m]", description: "Gives you 200% strength, 125% luck and 44% training speed", rarity: "legendary" },
     { name: "Dark Matter [1/30m]", description: "Gives you 197% strength, 116% luck and 42% training speed", rarity: "legendary" },
     { name: "Corrupted [1/20m", description: "Gives you 192% strength, 108% luck and 40% training speed", rarity: "common" },
     { name: "Galaxy [1/10m]", description: "Gives you 184% strength, 98% luck and 38% training speed", rarity: "legendary" },
