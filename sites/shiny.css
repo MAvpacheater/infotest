@@ -1,5 +1,13 @@
 /* Shiny Stats Page Styles */
 
+.shiny-page {
+    display: none;
+}
+
+.shiny-page.active {
+    display: block;
+}
+
 .shiny-page .title {
     font-family: 'Orbitron', monospace;
     font-size: 2.5em;
