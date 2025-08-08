@@ -1,69 +1,79 @@
-// Grind calculator functionality
+// ==== GRIND CALCULATOR ====
 
-const modifiersGrind = { 
-    tp1: 1.30, 
-    tp2: 1.60, 
-    tp3: 1.90, 
-    chocholate_donut: 1.15, 
+// Множники для grind
+const grindModifiers = {
+    tp1: 1.30,
+    tp2: 1.60,
+    tp3: 1.90,
+    chocholate_donut: 1.15,
     ench_coockie: 1.07
 };
 
-let currentMultiplierGrind = 1;
+let grindMultiplier = 1;
 
-// Toggle settings panel
-function toggleSettings() {
-    document.getElementById('settingsPanel').classList.toggle('show');
+// Показ/приховування налаштувань
+function toggleGrindSettings() {
+    const panel = document.getElementById('settingsPanelGrind');
+    if (panel) {
+        panel.classList.toggle('show');
+    }
 }
 
-// Update multiplier based on selected checkboxes
-function updateMultiplierGrind() {
-    currentMultiplierGrind = 1;
-    for (const mod in modifiersGrind) {
-        if (document.getElementById(mod).checked) {
-            currentMultiplierGrind *= modifiersGrind[mod];
+// Оновлення множника при зміні чекбоксів
+function updateGrindMultiplier() {
+    grindMultiplier = 1;
+    for (const id in grindModifiers) {
+        const checkbox = document.getElementById(id);
+        if (checkbox && checkbox.checked) {
+            grindMultiplier *= grindModifiers[id];
         }
     }
 }
 
-// Calculate grind stats
+// Розрахунок результату
 function calculateGrindStats() {
     const input = document.getElementById('numberInputGrind');
     const resultSection = document.getElementById('resultSectionGrind');
     const resultValue = document.getElementById('resultValueGrind');
     const errorMessage = document.getElementById('errorMessageGrind');
-    
+
+    if (!input || !resultSection || !resultValue || !errorMessage) return;
+
     errorMessage.textContent = '';
-    const inputValue = parseFloat(input.value);
-    
-    if (isNaN(inputValue) || input.value.trim() === '') {
+
+    const baseValue = parseFloat(input.value);
+
+    if (isNaN(baseValue) || input.value.trim() === '') {
         errorMessage.textContent = 'Please enter a valid number';
         resultSection.classList.remove('show');
         return;
     }
-    
-    const result = inputValue * currentMultiplierGrind;
-    resultValue.textContent = result.toLocaleString('uk-UA', { 
-        minimumFractionDigits: result % 1 === 0 ? 0 : 2, 
-        maximumFractionDigits: 8 
+
+    const finalValue = baseValue * grindMultiplier;
+
+    resultValue.textContent = finalValue.toLocaleString('uk-UA', {
+        minimumFractionDigits: finalValue % 1 === 0 ? 0 : 2,
+        maximumFractionDigits: 8
     });
+
     resultSection.classList.add('show');
 }
 
-// Initialize grind calculator
+// Ініціалізація Grind при завантаженні сторінки
 function initializeGrind() {
-    updateMultiplierGrind();
-    
+    updateGrindMultiplier();
+
     const numberInput = document.getElementById('numberInputGrind');
     if (numberInput) {
         numberInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') calculateGrindStats();
+            if (e.key === 'Enter') {
+                calculateGrindStats();
+            }
         });
-        
+
         numberInput.addEventListener('input', () => {
             const errorMessage = document.getElementById('errorMessageGrind');
-            if (errorMessage) {
-                errorMessage.textContent = '';
-            }
+            if (errorMessage) errorMessage.textContent = '';
         });
     }
 }
