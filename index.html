@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arm--Helper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="sites/calculator.css">
+    <link rel="stylesheet" href="sites/arm.css">
+    <link rel="stylesheet" href="sites/boosts.css">
+    <link rel="stylesheet" href="sites/shiny.css">
+    <link rel="stylesheet" href="sites/codes.css">
+    <link rel="stylesheet" href="sites/grind.css">
+</head>
+<body>
+    
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button class="close-sidebar" onclick="closeSidebar()">×</button>
+    </div>
+    <div class="nav-buttons">
+        <button class="nav-btn active" onclick="switchPage('calculator')">🐾 Pet Calculator</button>
+        <button class="nav-btn" onclick="switchPage('arm')">💪 Arm Calculator</button>
+        <button class="nav-btn" onclick="switchPage('grind')">🏋️‍♂️ Grind calc</button>
+        <button class="nav-btn" onclick="switchPage('boosts')">🚀 Boosts</button>
+        <button class="nav-btn" onclick="switchPage('shiny')">✨ Shiny Stats</button>
+        <button class="nav-btn" onclick="switchPage('codes')">🎁 Codes</button>
+    </div>
+</div>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+   
+<div class="container">
+    <!-- Calculator Page -->
+    <div class="page calculator-page active" id="calculatorPage">
+        <div class="header-controls">
+            <h1>Pet Stats Calculator</h1>
+            <button class="settings-btn" onclick="toggleSettings('settingsPanelCalc')">⚙️</button>
+        </div>
+
+        <div class="settings-panel" id="settingsPanelCalc">
+            <!-- Модифікатори -->
+        </div>
+        
+        <div class="input-section">
+            <label class="input-label">If baby pet</label>
+            <input type="number" class="number-input" id="numberInputCalc" placeholder="Enter number..." step="any">
+            <button class="calculate-btn" onclick="calculateStats('numberInputCalc','resultValueCalc','errorMessageCalc','resultSectionCalc')">Calculate</button>
+            <div class="error" id="errorMessageCalc"></div>
+        </div>
+
+        <div class="result-section" id="resultSectionCalc">
+            <div class="stats-label">Stats if max</div>
+            <div class="result-value" id="resultValueCalc">0</div>
+        </div>
+    </div>
+
+    <!-- Grind Page -->
+    <div class="page grind-page" id="grindPage">
+        <div class="header-controls">
+            <h1>Grind Stats Calculator</h1>
+            <button class="settings-btn" onclick="toggleSettings('settingsPanelGrind')">⚙️</button>
+        </div>
+
+        <div class="settings-panel" id="settingsPanelGrind">
+            <!-- Модифікатори -->
+        </div>
+        
+        <div class="input-section">
+            <label class="input-label">Without boosts</label>
+            <input type="number" class="number-input" id="numberInputGrind" placeholder="Enter number..." step="any">
+            <button class="calculate-btn" onclick="calculateStats('numberInputGrind','resultValueGrind','errorMessageGrind','resultSectionGrind')">Calculate</button>
+            <div class="error" id="errorMessageGrind"></div>
+        </div>
+
+        <div class="result-section" id="resultSectionGrind">
+            <div class="stats-label">Max</div>
+            <div class="result-value" id="resultValueGrind">0</div>
+        </div>
+    </div>
+
+    <!-- Arm Calculator Page -->
+    <div class="page arm-page" id="armPage">
+        <h1>Arm Stats Calculator</h1>
+        <div class="input-section">
+            <label class="input-label">If arm base</label>
+            <input type="number" class="number-input" id="armNumberInput" placeholder="Enter number..." step="any">
+            <button class="calculate-btn" onclick="calculateArmStats()">Calculate</button>
+            <div class="error" id="armErrorMessage"></div>
+        </div>
+        <div class="result-section" id="armResultSection">
+            <div class="stats-label">Max stats</div>
+            <div class="result-value" id="armResultValue">0</div>
+        </div>
+    </div>
+
+    <!-- Boosts Page -->
+    <div class="page boosts-page" id="boostsPage">
+        <h1 class="title">Boosts Information</h1>
+        <div class="boosts-container" id="boostsContainer"></div>
+    </div>
+
+    <!-- Shiny Stats Page -->
+    <div class="page shiny-page" id="shinyPage">
+        <h1 class="title">Shiny pets</h1>
+        <div class="stats-grid" id="statsGrid"></div>
+    </div>
+
+    <!-- Codes Page -->
+    <div class="page codes-page" id="codesPage">
+        <h1 class="title">Game Codes</h1>
+        <div class="codes-container" id="codesContainer"></div>
+    </div>
+</div>
+
+<div class="signature">Микола</div>
+
+<!-- JavaScript Files -->
+<script src="general.js"></script>
+<script src="sites/calculator.js"></script>
+<script src="sites/arm.js"></script>
+<script src="sites/boosts.js"></script>
+<script src="sites/shiny.js"></script>
+<script src="sites/codes.js"></script>
+<script src="sites/grind.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+/* Grind Page Styles */
+.grind-page { display: none; }
+.grind-page.active { display: block; }
+/* Далі стилі як у твоєму grind.css але з .grind-page замість .calculator-page */
