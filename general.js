@@ -19,11 +19,13 @@ function switchPage(page) {
         navButtons[0].classList.add('active');
     } else if (page === 'arm' && navButtons[1]) {
         navButtons[1].classList.add('active');
-    } else if (page === 'boosts' && navButtons[2]) {
+    } else if (page === 'grind' && navButtons[2]) {
+        navButtons[1].classList.add('active');
+    } else if (page === 'boosts' && navButtons[3]) {
         navButtons[2].classList.add('active');
-    } else if (page === 'shiny' && navButtons[3]) {
+    } else if (page === 'shiny' && navButtons[4]) {
         navButtons[3].classList.add('active');
-    } else if (page === 'codes' && navButtons[4]) {
+    } else if (page === 'codes' && navButtons[5]) {
         navButtons[4].classList.add('active');
     }
     
