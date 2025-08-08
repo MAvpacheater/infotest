@@ -9,6 +9,12 @@ const grindModifiers = {
     ench_cookie: 1.07
 };
 
+// Спеціальні множники
+const specialMultipliers = {
+    time: 2.7,      // +170% = x2.7
+    friend: 3.518   // 8 раз по +15%: (1.15)^8 ≈ 3.518
+};
+
 let grindMultiplier = 1;
 
 // Показ/приховування налаштувань
