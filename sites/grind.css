@@ -10,13 +10,6 @@
     margin-bottom: 15px;
 }
 
-.settings-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
 #settingsPanelGrind {
     display: none;
     margin-bottom: 20px;
@@ -43,28 +36,6 @@
 
 .input-section {
     margin-top: 15px;
-}
-
-.number-input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.calculate-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background: #4cafef;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-.calculate-btn:hover {
-    background: #3b8ccc;
 }
 
 .error {
