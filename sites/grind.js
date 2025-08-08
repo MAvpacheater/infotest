@@ -24,9 +24,17 @@ function toggleGrindSettings() {
 
 // Функція для обробки TP вибору (лише один з трьох)
 function handleTpSelection(selectedTp) {
-    const tpCheckboxes = ['tp1', 'tp2', 'tp3'];
+    const selectedCheckbox = document.getElementById(selectedTp);
     
-    // Вимикаємо всі інші TP
+    // Якщо чекбокс вимикається, просто оновлюємо множники
+    if (!selectedCheckbox || !selectedCheckbox.checked) {
+        updateGrindMultiplier();
+        calculateGrindStats();
+        return;
+    }
+    
+    // Якщо чекбокс вмикається, вимикаємо всі інші TP
+    const tpCheckboxes = ['tp1', 'tp2', 'tp3'];
     tpCheckboxes.forEach(tp => {
         if (tp !== selectedTp) {
             const checkbox = document.getElementById(tp);
@@ -37,6 +45,7 @@ function handleTpSelection(selectedTp) {
     });
     
     updateGrindMultiplier();
+    calculateGrindStats();
 }
 
 // Оновлення множника при зміні чекбоксів
@@ -48,6 +57,8 @@ function updateGrindMultiplier() {
             grindMultiplier *= grindModifiers[id];
         }
     }
+    // Автоматично перерахувати результат після оновлення множника
+    calculateGrindStats();
 }
 
 // Функція для розрахунку Friend bonus (8 разів по +15%)
@@ -73,7 +84,9 @@ function calculateGrindStats() {
     const baseValue = parseFloat(input.value);
 
     if (isNaN(baseValue) || input.value.trim() === '') {
-        errorMessage.textContent = 'Please enter a valid number';
+        if (input.value.trim() !== '') {
+            errorMessage.textContent = 'Please enter a valid number';
+        }
         resultSection.classList.remove('show');
         return;
     }
