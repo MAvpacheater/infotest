@@ -3,58 +3,58 @@
 // Info data
 const infoData = [
     {
-        title: "Game Basics",
-        icon: "🎮",
-        description: "Learn the fundamental mechanics of the game including pet training, stat calculations, and progression systems.",
-        details: "Understanding these basics will help you make better decisions when training your pets and calculating optimal strategies.",
-        category: "general"
-    },
-    {
-        title: "Pet Evolution Guide",
-        icon: "🐾",
-        description: "Complete guide on how to evolve your pets and maximize their potential through proper training techniques.",
-        details: "Evolution requires specific stat thresholds and proper timing. Each evolution stage multiplies your pet's base stats.",
+        title: "Max lvl",
+        icon: "🍓",
+        description: "You need 6k+- ench rasb to get max lvl",
+        details: "Its 780k+- xp",
         category: "gameplay"
     },
     {
-        title: "Multiplier Stacking",
-        icon: "📈",
-        description: "Learn how different multipliers work together to boost your pet's stats and training efficiency.",
-        details: "Multipliers from various sources stack multiplicatively, not additively. Understanding this is crucial for optimal progression.",
-        category: "mechanics"
+        title: "Best arm in game",
+        icon: "🏋️‍♂️",
+        description: "Patrim - from endless pack",
+        details: "Gives 42x base and 3x event, If max 88,2x",
+        category: "gameplay"
+    },
+    {
+        title: "Best pet in game",
+        icon: "🐕",
+        description: "Mega Cappucino Assasino ",
+        details: "Gives 450% to best pet and 2.15b if baby (have l8), If max 240b+-",
+        category: "gameplay"
     },
     {
         title: "Training Optimization",
         icon: "💪",
-        description: "Tips and strategies for maximizing your training efficiency and getting the most out of your time investment.",
-        details: "Focus on high-multiplier areas during boost periods. Use time-limited boosts strategically for maximum impact.",
+        description: "Use all boosts",
+        details: "Buy beteer pets and arms/trainers/auras",
         category: "tips"
     },
     {
-        title: "Boost Management",
-        icon: "🚀",
-        description: "How to effectively use and stack different types of boosts for maximum training benefits.",
-        details: "Some boosts stack with each other while others override. Plan your boost usage around your available playtime.",
-        category: "gameplay"
+        title: "Best tactic",
+        icon: "🏦",
+        description: "How to get tokens??.",
+        details: "Go to the server - buy cheap, then go to discord and sell - normall/overprice",
+        category: "tips"
     },
     {
-        title: "Shiny Pet Mechanics",
+        title: "How to get best rep??",
         icon: "✨",
-        description: "Everything you need to know about shiny pets, their stat bonuses, and how to obtain them.",
-        details: "Shiny pets provide a 1.15x multiplier to all stats and have unique visual effects. They're rare but worth the investment.",
-        category: "mechanics"
+        description: "Uprage arm (do golden/craft arms)",
+        details: "Uprage pets, craft to big/huge/goliath, make mutation,uprage lvl, do best slime",
+        category: "tips"
     },
     {
-        title: "Advanced Calculations",
-        icon: "🔢",
-        description: "Deep dive into the mathematical formulas used for stat calculations and progression planning.",
-        details: "Understanding the underlying math helps you make informed decisions about resource allocation and training priorities.",
-        category: "mechanics"
+        title: "Cheap team for main world",
+        icon: "🪙",
+        description: "Buy pets in bulk (sellers will make discount for bulk)",
+        details: "Buy shiny pets, its will make good boost but worth cheaper then normall (310% shiny ≈ 356% but worth 2k+-, and 355% worth 5k+-)",
+        category: "tips"
     },
     {
-        title: "Recent Updates",
+        title: "Updates/when and wht",
         icon: "🆕",
-        description: "Stay informed about the latest game changes, new features, and balance adjustments.",
+        description: "Update every saturday",
         details: "Regular updates introduce new content, fix bugs, and rebalance existing mechanics. Stay updated for optimal play.",
         category: "updates"
     },
