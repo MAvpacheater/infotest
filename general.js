@@ -12,20 +12,19 @@ function switchPage(page) {
         targetPage.classList.add('active');
     }
     
+
     // Update active nav button
     const navButtons = document.querySelectorAll('.nav-btn');
     if (page === 'calculator' && navButtons[0]) {
         navButtons[0].classList.add('active');
     } else if (page === 'arm' && navButtons[1]) {
         navButtons[1].classList.add('active');
-    } else if (page === 'grind' && navButtons[2]) {
+    } else if (page === 'boosts' && navButtons[2]) {
         navButtons[2].classList.add('active');
-    } else if (page === 'boosts' && navButtons[3]) {
+    } else if (page === 'shiny' && navButtons[3]) {
         navButtons[3].classList.add('active');
-    } else if (page === 'shiny' && navButtons[4]) {
+    } else if (page === 'codes' && navButtons[4]) {
         navButtons[4].classList.add('active');
-    } else if (page === 'codes' && navButtons[5]) {
-        navButtons[5].classList.add('active');
     }
     
     // Close sidebar after selection
@@ -69,22 +68,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initialize calculators
-    if (typeof initializeCalculator === 'function') initializeCalculator();
-    if (typeof initializeArm === 'function') initializeArm();
-    if (typeof initializeBoosts === 'function') initializeBoosts();
-    if (typeof initializeShiny === 'function') initializeShiny();
-    if (typeof initializeGrind === 'function') initializeGrind();
+    // Initialize calculator functions
+    if (typeof initializeCalculator === 'function') {
+        initializeCalculator();
+    }
+
+    // Initialize arm calculator
+    if (typeof initializeArm === 'function') {
+        initializeArm();
+    }
+
+    // Initialize boosts
+    if (typeof initializeBoosts === 'function') {
+        initializeBoosts();
+    }
+
+    // Initialize shiny stats
+    if (typeof initializeShiny === 'function') {
+        initializeShiny();
+    }
+
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
 });
 
 // Compatibility timeout for initialization
 setTimeout(() => {
+    // Make sure calculator page is active by default
     if (!document.querySelector('.page.active')) {
         switchPage('calculator');
     }
-    if (typeof initializeCalculator === 'function') initializeCalculator();
-    if (typeof initializeArm === 'function') initializeArm();
-    if (typeof initializeBoosts === 'function') initializeBoosts();
-    if (typeof initializeShiny === 'function') initializeShiny();
-    if (typeof initializeGrind === 'function') initializeGrind();
+    
+    // Initialize calculator functions
+    if (typeof initializeCalculator === 'function') {
+        initializeCalculator();
+    }
+
+    // Initialize arm calculator
+    if (typeof initializeArm === 'function') {
+        initializeArm();
+    }
+
+    // Initialize boosts
+    if (typeof initializeBoosts === 'function') {
+        initializeBoosts();
+    }
+
+    // Initialize shiny stats
+    if (typeof initializeShiny === 'function') {
+        initializeShiny();
+    }
+
+    // Initialize grind calculator
+    if (typeof initializeGrind === 'function') {
+        initializeGrind();
+    }
 }, 100);
