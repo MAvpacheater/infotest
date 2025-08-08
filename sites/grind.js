@@ -6,11 +6,7 @@ const grindModifiers = {
     tp2: 1.60,
     tp3: 1.90,
     chocolate_donut: 1.15,
-    ench_cookie: 1.07
-};
-
-// Спеціальні множники
-const specialMultipliers = {
+    ench_cookie: 1.07,
     time: 2.7,      // +170% = x2.7
     friend: 3.518   // 8 раз по +15%: (1.15)^8 ≈ 3.518
 };
