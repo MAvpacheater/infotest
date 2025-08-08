@@ -61,12 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', e => {
         const settingsPanel = document.getElementById('settingsPanel');
         const settingsBtn = document.querySelector('.settings-btn');
-        if (settingsPanel && settingsBtn) {
-            if (!settingsPanel.contains(e.target) && !settingsBtn.contains(e.target)) {
-                settingsPanel.classList.remove('show');
+        // Закриваємо панелі налаштувань при кліку поза ними
+        const settingsPanels = [
+            { panel: document.getElementById('settingsPanel'), btn: document.querySelector('#calculatorPage .settings-btn') },
+            { panel: document.getElementById('settingsPanelGrind'), btn: document.querySelector('#grindPage .settings-btn') }
+        ];
+        
+        settingsPanels.forEach(({ panel, btn }) => {
+            if (panel && btn) {
+                if (!panel.contains(e.target) && !btn.contains(e.target)) {
+                    panel.classList.remove('show');
+                }
             }
-        }
-    });
+        });
 
     // Initialize calculator functions
     if (typeof initializeCalculator === 'function') {
