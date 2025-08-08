@@ -1,11 +1,11 @@
 /* Shiny Stats Page Styles */
 
 .shiny-page {
-    display: none;
+    display: none !important;
 }
 
 .shiny-page.active {
-    display: block;
+    display: block !important;
 }
 
 .shiny-page .title {
