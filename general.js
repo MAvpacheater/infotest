@@ -102,7 +102,7 @@ let appInitialized = false;
 
 // Головна функція ініціалізації (викликається після завантаження контенту)
 function initializeApp() {
-    if (appInitialized) {
+    if (typeof appInitialized !== 'undefined' && appInitialized) {
         console.log('⚠️ Додаток вже ініціалізовано');
         return;
     }
@@ -152,6 +152,10 @@ function initializeApp() {
     // Initialize all modules
     initializeAllModules();
     
+    // Set the flag AFTER initialization
+    if (typeof window !== 'undefined') {
+        window.appInitialized = true;
+    }
     appInitialized = true;
     console.log('✅ Ініціалізація додатка завершена');
 }
