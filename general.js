@@ -59,8 +59,10 @@ function closeSidebar() {
     }
 }
 
-// Initialize functions when page loads
-document.addEventListener('DOMContentLoaded', () => {
+// Головна функція ініціалізації (викликається після завантаження контенту)
+function initializeApp() {
+    console.log('Ініціалізація додатка...');
+    
     // Make sure calculator page is active by default
     switchPage('calculator');
     
@@ -82,91 +84,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize calculator functions
-    if (typeof initializeCalculator === 'function') {
-        initializeCalculator();
-    }
+    // Initialize all modules
+    initializeAllModules();
+}
 
-    // Initialize arm calculator
-    if (typeof initializeArm === 'function') {
-        initializeArm();
-    }
+// Ініціалізація всіх модулів
+function initializeAllModules() {
+    const modules = [
+        'initializeCalculator',
+        'initializeArm', 
+        'initializeGrind',
+        'initializeBoosts',
+        'initializeShiny',
+        'initializeAura',
+        'initializeTrainer',
+        'initializeInfo'
+    ];
 
-    // Initialize grind calculator
-    if (typeof initializeGrind === 'function') {
-        initializeGrind();
-    }
-
-    // Initialize boosts
-    if (typeof initializeBoosts === 'function') {
-        initializeBoosts();
-    }
-
-    // Initialize shiny stats
-    if (typeof initializeShiny === 'function') {
-        initializeShiny();
-    }
-
-    // Initialize aura
-    if (typeof initializeAura === 'function') {
-        initializeAura();
-    }
-
-    // Initialize trainer
-    if (typeof initializeTrainer === 'function') {
-        initializeTrainer();
-    }
-
-    // Initialize info
-    if (typeof initializeInfo === 'function') {
-        initializeInfo();
-    }
-});
-
-// Compatibility timeout for initialization
-setTimeout(() => {
-    // Make sure calculator page is active by default
-    if (!document.querySelector('.page.active')) {
-        switchPage('calculator');
-    }
-    
-    // Initialize calculator functions
-    if (typeof initializeCalculator === 'function') {
-        initializeCalculator();
-    }
-
-    // Initialize arm calculator
-    if (typeof initializeArm === 'function') {
-        initializeArm();
-    }
-
-    // Initialize grind calculator
-    if (typeof initializeGrind === 'function') {
-        initializeGrind();
-    }
-
-    // Initialize boosts
-    if (typeof initializeBoosts === 'function') {
-        initializeBoosts();
-    }
-
-    // Initialize shiny stats
-    if (typeof initializeShiny === 'function') {
-        initializeShiny();
-    }
-
-    // Initialize aura
-    if (typeof initializeAura === 'function') {
-        initializeAura();
-    }
-
-    // Initialize trainer
-    if (typeof initializeTrainer === 'function') {
-        initializeTrainer();
-    }
-
-    // Initialize info
-    if (typeof initializeInfo === 'function') {
-        initializeInfo();
-    }
-}, 100);
+    modules.forEach(moduleName => {
+        if (typeof window[moduleName] === 'function') {
+            try {
+                window[moduleName]();
+                console.log(`✅ ${moduleName} ініціалізовано`);
+            } catch (error) {
+                console.error(`❌ Помилка ініціалізації ${moduleName}:`, error);
+            }
+        } else {
+            console.warn(`⚠️ Функція ${moduleName} не знайдена`);
+        }
+    });
+}
