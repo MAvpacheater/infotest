@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadContent() {
     try {
-        const response = await fetch('content.html');
+        const response = await fetch('index/content.html');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
