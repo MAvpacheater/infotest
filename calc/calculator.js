@@ -31,7 +31,7 @@ const modifierCategories = {
         default: "mutation_cosmic" // найкращий за замовчуванням
     },
     evolution: {
-        title: "Size",
+        title: "Evolution and Size",
         options: [
             { id: "evolution_baby", name: "Baby", multiplier: 1 },
             { id: "evolution_big", name: "Big", multiplier: 1.5 },
@@ -62,14 +62,19 @@ let currentSelections = {};
 
 // Ініціалізація за замовчуванням
 function initializeDefaults() {
+    console.log('🔧 Ініціалізація дефолтних значень...');
+    
     // Встановлюємо найкращі варіанти для кожної категорії
     for (const [categoryKey, category] of Object.entries(modifierCategories)) {
         currentSelections[categoryKey] = category.default;
+        console.log(`✅ ${categoryKey}: ${category.default}`);
     }
     
     // Включаємо прості модифікатори за замовчуванням
     currentSelections.shiny = true;
     currentSelections.maxlvl = true;
+    
+    console.log('📊 Поточні вибори:', currentSelections);
 }
 
 let isInCategoryView = false;
@@ -204,7 +209,16 @@ function calculateStats() {
 // Отримання назви обраного варіанту в категорії
 function getSelectedOptionName(categoryKey) {
     const selectedId = currentSelections[categoryKey];
-    if (!selectedId) return 'None';
+    if (!selectedId) {
+        // Якщо нічого не вибрано, повертаємо дефолтний варіант
+        const category = modifierCategories[categoryKey];
+        if (category && category.default) {
+            currentSelections[categoryKey] = category.default;
+            const option = category.options.find(opt => opt.id === category.default);
+            return option ? option.name : 'None';
+        }
+        return 'None';
+    }
     
     const category = modifierCategories[categoryKey];
     if (!category) return 'None';
@@ -291,10 +305,21 @@ function createSettingsHTML() {
 
 // Ініціалізація калькулятора при завантаженні сторінки
 function initializeCalculator() {
+    console.log('🚀 Ініціалізація калькулятора...');
+    
+    // Скидаємо поточні вибори
+    currentSelections = {};
+    
+    // Ініціалізуємо дефолтні значення
     initializeDefaults();
+    
+    // Створюємо HTML для налаштувань
     createSettingsHTML();
+    
+    // Розраховуємо початкові статистики
     calculateStats();
 
+    // Додаємо обробники подій
     const numberInput = document.getElementById('numberInput');
     if (numberInput) {
         numberInput.addEventListener('keypress', e => {
@@ -308,4 +333,6 @@ function initializeCalculator() {
             if (errorMessage) errorMessage.textContent = '';
         });
     }
+    
+    console.log('✅ Калькулятор ініціалізовано');
 }
