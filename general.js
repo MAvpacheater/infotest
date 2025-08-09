@@ -59,9 +59,24 @@ function closeSidebar() {
     }
 }
 
+// Прапорець для запобігання повторної ініціалізації
+let appInitialized = false;
+
 // Головна функція ініціалізації (викликається після завантаження контенту)
 function initializeApp() {
-    console.log('Ініціалізація додатка...');
+    if (appInitialized) {
+        console.log('⚠️ Додаток вже ініціалізовано');
+        return;
+    }
+    
+    console.log('🚀 Початок ініціалізації додатка...');
+    
+    // Перевіряємо чи контент завантажився
+    const appContent = document.getElementById('app-content');
+    if (!appContent || !appContent.innerHTML.trim()) {
+        console.error('❌ Контент не завантажено');
+        return;
+    }
     
     // Make sure calculator page is active by default
     switchPage('calculator');
@@ -86,6 +101,9 @@ function initializeApp() {
 
     // Initialize all modules
     initializeAllModules();
+    
+    appInitialized = true;
+    console.log('✅ Ініціалізація додатка завершена');
 }
 
 // Ініціалізація всіх модулів
