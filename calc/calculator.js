@@ -88,14 +88,22 @@ function toggleSettings() {
 }
 
 // Показ підменю категорії
-function showCategoryPanel(categoryKey) {
+function showCategoryPanel(categoryKey, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     isInCategoryView = true;
     currentCategoryView = categoryKey;
     createSettingsHTML();
 }
 
 // Повернення до основних налаштувань
-function backToMainSettings() {
+function backToMainSettings(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     isInCategoryView = false;
     currentCategoryView = null;
     createSettingsHTML();
@@ -247,7 +255,7 @@ function createSettingsHTML() {
         for (const [categoryKey, category] of Object.entries(modifierCategories)) {
             const selectedName = getSelectedOptionName(categoryKey);
             html += `
-                <button class="category-button" onclick="showCategoryPanel('${categoryKey}')">
+                <button type="button" class="category-button" onclick="showCategoryPanel('${categoryKey}', event)">
                     <div class="category-button-content">
                         <div class="category-name">${category.title}</div>
                         <div class="category-selected">${selectedName}</div>
