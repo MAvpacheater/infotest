@@ -69,43 +69,36 @@ function initializeDefaults() {
     currentSelections.maxlvl = true;
 }
 
+let isInCategoryView = false;
+let currentCategoryView = null;
+
 // Показ/приховування налаштувань
 function toggleSettings() {
     const panel = document.getElementById('settingsPanel');
-    const categoryPanel = document.getElementById('categoryPanel');
-    
     if (panel) {
         panel.classList.toggle('show');
-        // Ховаємо панель категорії при відкритті основних налаштувань
-        if (categoryPanel) {
-            categoryPanel.classList.remove('show');
+        
+        // При відкритті налаштувань повертаємося до основного вигляду
+        if (panel.classList.contains('show')) {
+            isInCategoryView = false;
+            currentCategoryView = null;
+            createSettingsHTML();
         }
     }
 }
 
-// Показ панелі категорії
+// Показ підменю категорії
 function showCategoryPanel(categoryKey) {
-    const settingsPanel = document.getElementById('settingsPanel');
-    const categoryPanel = document.getElementById('categoryPanel');
-    
-    if (settingsPanel && categoryPanel) {
-        settingsPanel.classList.remove('show');
-        categoryPanel.classList.add('show');
-        
-        // Заповнюємо панель категорії
-        createCategoryPanelHTML(categoryKey);
-    }
+    isInCategoryView = true;
+    currentCategoryView = categoryKey;
+    createSettingsHTML();
 }
 
 // Повернення до основних налаштувань
-function backToSettings() {
-    const settingsPanel = document.getElementById('settingsPanel');
-    const categoryPanel = document.getElementById('categoryPanel');
-    
-    if (settingsPanel && categoryPanel) {
-        categoryPanel.classList.remove('show');
-        settingsPanel.classList.add('show');
-    }
+function backToMainSettings() {
+    isInCategoryView = false;
+    currentCategoryView = null;
+    createSettingsHTML();
 }
 
 // Створення HTML для панелі категорії
@@ -245,44 +238,89 @@ function selectCategoryOption(categoryKey, optionId) {
     calculateStats();
 }
 
+// Отримання назви обраного варіанту в категорії
+function getSelectedOptionName(categoryKey) {
+    const selectedId = currentSelections[categoryKey];
+    if (!selectedId) return 'None';
+    
+    const category = modifierCategories[categoryKey];
+    if (!category) return 'None';
+    
+    const option = category.options.find(opt => opt.id === selectedId);
+    return option ? option.name : 'None';
+}
+
 // Створення HTML для налаштувань
 function createSettingsHTML() {
     const panel = document.getElementById('settingsPanel');
     if (!panel) return;
 
-    let html = '<div class="settings-title">Settings</div>';
+    let html = '';
     
-    // Прості модифікатори
-    for (const [key, modifier] of Object.entries(simpleModifiers)) {
-        html += `
-            <div class="simple-modifier">
-                <div class="simple-modifier-label">
-                    <span>${modifier.name}</span>
-                    <span class="modifier-multiplier">(x${modifier.multiplier})</span>
+    // Якщо ми в режимі перегляду категорії
+    if (isInCategoryView && currentCategoryView) {
+        const category = modifierCategories[currentCategoryView];
+        if (category) {
+            html += `
+                <div class="settings-header">
+                    <div class="settings-title">${category.title}</div>
+                    <button class="back-btn" onclick="backToMainSettings()">← Back</button>
                 </div>
-                <label class="switch">
-                    <input type="checkbox" id="${key}" ${currentSelections[key] ? 'checked' : ''} 
-                           onchange="toggleSimpleModifier('${key}')">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        `;
-    }
-    
-    // Кнопки категорій замість розгортання
-    for (const [categoryKey, category] of Object.entries(modifierCategories)) {
-        const selectedName = getSelectedOptionName(categoryKey);
-        html += `
-            <button class="category-button" onclick="showCategoryPanel('${categoryKey}')">
-                <div class="category-button-content">
-                    <div>
+            `;
+            
+            // Варіанти категорії
+            for (const option of category.options) {
+                const isSelected = currentSelections[currentCategoryView] === option.id;
+                html += `
+                    <div class="modifier-item">
+                        <div class="modifier-label">
+                            <span>${option.name}</span>
+                            <span class="modifier-multiplier">(${option.multiplier}x)</span>
+                        </div>
+                        <label class="category-switch">
+                            <input type="checkbox" id="${option.id}" name="${currentCategoryView}" 
+                                   ${isSelected ? 'checked' : ''}
+                                   onchange="selectCategoryOption('${currentCategoryView}', '${option.id}')">
+                            <span class="category-slider"></span>
+                        </label>
+                    </div>
+                `;
+            }
+        }
+    } else {
+        // Основний вигляд налаштувань
+        html += '<div class="settings-title">Settings</div>';
+        
+        // Кнопки категорій
+        for (const [categoryKey, category] of Object.entries(modifierCategories)) {
+            const selectedName = getSelectedOptionName(categoryKey);
+            html += `
+                <button class="category-button" onclick="showCategoryPanel('${categoryKey}')">
+                    <div class="category-button-content">
                         <div class="category-name">${category.title}</div>
-                        <div class="category-selected">Selected: ${selectedName}</div>
+                        <div class="category-selected">${selectedName}</div>
                     </div>
                     <span class="category-arrow">→</span>
+                </button>
+            `;
+        }
+        
+        // Прості модифікатори
+        for (const [key, modifier] of Object.entries(simpleModifiers)) {
+            html += `
+                <div class="simple-modifier">
+                    <div class="simple-modifier-label">
+                        <span>${modifier.name}</span>
+                        <span class="modifier-multiplier">(x${modifier.multiplier})</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="${key}" ${currentSelections[key] ? 'checked' : ''} 
+                               onchange="toggleSimpleModifier('${key}')">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-            </button>
-        `;
+            `;
+        }
     }
     
     panel.innerHTML = html;
