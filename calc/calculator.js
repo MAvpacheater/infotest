@@ -101,62 +101,35 @@ function backToMainSettings() {
     createSettingsHTML();
 }
 
-// Створення HTML для панелі категорії
-function createCategoryPanelHTML(categoryKey) {
-    const categoryPanel = document.getElementById('categoryPanel');
-    if (!categoryPanel) return;
-    
-    const category = modifierCategories[categoryKey];
-    if (!category) return;
-    
-    let html = `
-        <div class="category-panel-header">
-            <div class="category-panel-title">${category.title}</div>
-            <button class="back-btn" onclick="backToSettings()">← Back</button>
-        </div>
-    `;
-    
-    for (const option of category.options) {
-        const isSelected = currentSelections[categoryKey] === option.id;
-        html += `
-            <div class="modifier-item">
-                <div class="modifier-label">
-                    <span>${option.name}</span>
-                    <span class="modifier-multiplier">(${option.multiplier}x)</span>
-                </div>
-                <label class="category-switch">
-                    <input type="checkbox" id="${option.id}" name="${categoryKey}" 
-                           ${isSelected ? 'checked' : ''}
-                           onchange="selectCategoryOption('${categoryKey}', '${option.id}')">
-                    <span class="category-slider"></span>
-                </label>
-            </div>
-        `;
+// Обробка переключення в категорії (нова функція)
+function handleCategoryToggle(categoryKey, optionId, checkbox) {
+    // Якщо checkbox зняли, не робимо нічого (не дозволяємо зняти вибір)
+    if (!checkbox.checked) {
+        checkbox.checked = true;
+        return;
     }
     
-    categoryPanel.innerHTML = html;
-}
-
-// Отримання назви обраного варіанту в категорії
-function getSelectedOptionName(categoryKey) {
-    const selectedId = currentSelections[categoryKey];
-    if (!selectedId) return 'None';
+    // Знімаємо всі інші чекбокси в цій категорії
+    const categoryInputs = document.querySelectorAll(`input[name="${categoryKey}"]`);
+    categoryInputs.forEach(input => {
+        if (input.id !== optionId) {
+            input.checked = false;
+        }
+    });
     
-    const category = modifierCategories[categoryKey];
-    if (!category) return 'None';
+    // Встановлюємо новий вибір
+    currentSelections[categoryKey] = optionId;
     
-    const option = category.options.find(opt => opt.id === selectedId);
-    return option ? option.name : 'None';
+    // Оновлюємо основну панель налаштувань (якщо потрібно показати оновлений вибір)
+    // createSettingsHTML(); // Закоментовуємо, щоб не перемальовувати панель
+    
+    // Перераховуємо статистики
+    calculateStats();
 }
 
 // Обробка toggle для простих модифікаторів
 function toggleSimpleModifier(modifierKey) {
     currentSelections[modifierKey] = !currentSelections[modifierKey];
-    // Оновлюємо тільки стан чекбокса без перемальовування всієї панелі
-    const checkbox = document.getElementById(modifierKey);
-    if (checkbox) {
-        checkbox.checked = currentSelections[modifierKey];
-    }
     calculateStats();
 }
 
@@ -217,32 +190,6 @@ function calculateStats() {
     resultSection.classList.add('show');
 }
 
-// Обробка вибору в категорії (toggle switch логіка)
-function selectCategoryOption(categoryKey, optionId) {
-    const clickedInput = document.getElementById(optionId);
-    
-    // Якщо цей варіант вже обраний, не робимо нічого
-    if (currentSelections[categoryKey] === optionId && clickedInput.checked) {
-        return;
-    }
-    
-    // Знімаємо всі чекбокси в панелі категорії
-    const categoryInputs = document.querySelectorAll(`#categoryPanel input[type="checkbox"]`);
-    categoryInputs.forEach(input => {
-        input.checked = false;
-    });
-    
-    // Встановлюємо обраний
-    currentSelections[categoryKey] = optionId;
-    if (clickedInput) {
-        clickedInput.checked = true;
-    }
-    
-    // Оновлюємо основну панель налаштувань
-    createSettingsHTML();
-    calculateStats();
-}
-
 // Отримання назви обраного варіанту в категорії
 function getSelectedOptionName(categoryKey) {
     const selectedId = currentSelections[categoryKey];
@@ -285,7 +232,7 @@ function createSettingsHTML() {
                         <label class="category-switch">
                             <input type="checkbox" id="${option.id}" name="${currentCategoryView}" 
                                    ${isSelected ? 'checked' : ''}
-                                   onchange="handleCategoryToggle('${currentCategoryView}', '${option.id}', this)">>
+                                   onchange="handleCategoryToggle('${currentCategoryView}', '${option.id}', this)">
                             <span class="category-slider"></span>
                         </label>
                     </div>
