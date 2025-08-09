@@ -1,7 +1,7 @@
 /* Trainer Page Styles */
 
 .trainer-page {
-    display: none !important;
+    display: none;
 }
 
 .trainer-page.active {
