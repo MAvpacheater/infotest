@@ -75,12 +75,57 @@
     text-align: center;
 }
 
+/* Category Section */
+.category-section {
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.category-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.category-header:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.category-arrow {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.category-header.active .category-arrow {
+    transform: rotate(180deg);
+}
+
+.category-content {
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    transition: max-height 0.3s ease;
+}
+
+.category-content.active {
+    max-height: 500px;
+}
+
+/* Modifier Item */
 .modifier-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .modifier-item:last-child { 
@@ -89,11 +134,69 @@
 
 .modifier-label {
     color: #555;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
-/* Toggle Switches */
+.modifier-multiplier {
+    color: #667eea;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+/* Radio Button Styles */
+.radio-switch {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.radio-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background-color: #ccc;
+    transition: .3s;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.radio-slider:before {
+    position: absolute;
+    content: "";
+    height: 8px; 
+    width: 8px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .radio-slider { 
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+input:checked + .radio-slider:before { 
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Toggle Switches для simple modifiers */
 .switch {
     position: relative;
     display: inline-block;
@@ -137,6 +240,27 @@ input:checked + .slider {
 
 input:checked + .slider:before { 
     transform: translateX(25px); 
+}
+
+/* Simple modifier item for shiny and maxlvl */
+.simple-modifier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.simple-modifier-label {
+    color: #555;
+    font-size: 1.1em;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 /* Input Section */
@@ -251,5 +375,18 @@ input:checked + .slider:before {
     .header-controls { 
         flex-direction: column; 
         gap: 15px; 
+    }
+
+    .category-header {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+
+    .modifier-item {
+        padding: 10px 12px;
+    }
+
+    .modifier-label {
+        font-size: 0.9em;
     }
 }
