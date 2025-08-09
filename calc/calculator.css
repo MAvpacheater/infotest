@@ -58,26 +58,8 @@
     animation: slideDown 0.3s ease-out;
 }
 
-/* Category Panel - окреме меню для підвкладок */
-.category-panel {
-    display: none;
-    background: rgba(246, 249, 252, 0.95);
-    border: 2px solid #e1ecf4;
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 20px;
-    text-align: left;
-    max-width: 500px;
-    width: 100%;
-    position: relative;
-}
-
-.category-panel.show {
-    display: block;
-    animation: slideDown 0.3s ease-out;
-}
-
-.category-panel-header {
+/* Settings Header */
+.settings-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,10 +68,11 @@
     border-bottom: 2px solid #e1ecf4;
 }
 
-.category-panel-title {
+.settings-title {
     color: #2c3e50;
     font-size: 1.3em;
     font-weight: 600;
+    margin: 0;
 }
 
 .back-btn {
@@ -129,20 +112,20 @@
     text-align: center;
 }
 
-/* Category Button - замість розгортання */
+/* Category Button - компактна кнопка */
 .category-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    margin-bottom: 15px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1em;
     transition: all 0.3s ease;
     width: 100%;
     text-align: left;
@@ -150,8 +133,8 @@
 
 .category-button:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
 }
 
 .category-button-content {
@@ -162,16 +145,18 @@
 }
 
 .category-name {
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .category-selected {
-    font-size: 0.9em;
+    font-size: 0.85em;
     opacity: 0.8;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .category-arrow {
-    font-size: 1.2em;
+    font-size: 1em;
+    margin-left: 10px;
 }
 
 /* Modifier Item */
@@ -300,8 +285,8 @@ input:checked + .slider:before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px;
-    margin-bottom: 15px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
