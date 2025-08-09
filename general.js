@@ -1,4 +1,4 @@
-// General JavaScript functions
+ʼ// General JavaScript functions
 
 // Page switching functionality
 function switchPage(page) {
@@ -81,7 +81,7 @@ function initializeApp() {
     // Make sure calculator page is active by default
     switchPage('calculator');
     
-    // Click outside settings panel to close
+    // Click outside settings panel to close - ВИПРАВЛЕНА ВЕРСІЯ
     document.addEventListener('click', e => {
         // Закриваємо панелі налаштувань при кліку поза ними
         const settingsPanels = [
@@ -92,7 +92,19 @@ function initializeApp() {
         
         settingsPanels.forEach(({ panel, btn }) => {
             if (panel && btn) {
-                if (!panel.contains(e.target) && !btn.contains(e.target)) {
+                // Перевіряємо чи клік був НЕ всередині панелі і НЕ на кнопці налаштувань
+                // Також перевіряємо чи це не клік на category-button або back-btn
+                const isClickInsidePanel = panel.contains(e.target);
+                const isClickOnSettingsBtn = btn.contains(e.target);
+                const isClickOnCategoryButton = e.target.closest('.category-button');
+                const isClickOnBackButton = e.target.closest('.back-btn');
+                const isClickOnCategorySwitch = e.target.closest('.category-switch');
+                const isClickOnSimpleModifier = e.target.closest('.simple-modifier');
+                
+                // Закриваємо панель тільки якщо клік був поза всіма інтерактивними елементами
+                if (!isClickInsidePanel && !isClickOnSettingsBtn && 
+                    !isClickOnCategoryButton && !isClickOnBackButton && 
+                    !isClickOnCategorySwitch && !isClickOnSimpleModifier) {
                     panel.classList.remove('show');
                 }
             }
