@@ -149,9 +149,14 @@ function getSelectedOptionName(categoryKey) {
     return option ? option.name : 'None';
 }
 
-// Обробка простих модифікаторів
+// Обробка toggle для простих модифікаторів
 function toggleSimpleModifier(modifierKey) {
     currentSelections[modifierKey] = !currentSelections[modifierKey];
+    // Оновлюємо тільки стан чекбокса без перемальовування всієї панелі
+    const checkbox = document.getElementById(modifierKey);
+    if (checkbox) {
+        checkbox.checked = currentSelections[modifierKey];
+    }
     calculateStats();
 }
 
@@ -280,7 +285,7 @@ function createSettingsHTML() {
                         <label class="category-switch">
                             <input type="checkbox" id="${option.id}" name="${currentCategoryView}" 
                                    ${isSelected ? 'checked' : ''}
-                                   onchange="selectCategoryOption('${currentCategoryView}', '${option.id}')">
+                                   onchange="handleCategoryToggle('${currentCategoryView}', '${option.id}', this)">>
                             <span class="category-slider"></span>
                         </label>
                     </div>
