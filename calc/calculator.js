@@ -88,20 +88,25 @@ function toggleCategory(categoryKey) {
     }
 }
 
-// Обробка вибору в категорії (radio button логіка)
+// Обробка вибору в категорії (toggle switch логіка)
 function selectCategoryOption(categoryKey, optionId) {
-    currentSelections[categoryKey] = optionId;
+    const clickedInput = document.getElementById(optionId);
+    
+    // Якщо цей варіант вже обраний, не робимо нічого
+    if (currentSelections[categoryKey] === optionId && clickedInput.checked) {
+        return;
+    }
     
     // Знімаємо всі чекбокси в цій категорії
-    const categoryInputs = document.querySelectorAll(`[data-category="${categoryKey}"] input[type="radio"]`);
+    const categoryInputs = document.querySelectorAll(`[data-category="${categoryKey}"] input[type="checkbox"]`);
     categoryInputs.forEach(input => {
         input.checked = false;
     });
     
     // Встановлюємо обраний
-    const selectedInput = document.getElementById(optionId);
-    if (selectedInput) {
-        selectedInput.checked = true;
+    currentSelections[categoryKey] = optionId;
+    if (clickedInput) {
+        clickedInput.checked = true;
     }
     
     calculateStats();
@@ -213,11 +218,11 @@ function createSettingsHTML() {
                         <span>${option.name}</span>
                         <span class="modifier-multiplier">(${option.multiplier}x)</span>
                     </div>
-                    <label class="radio-switch">
-                        <input type="radio" id="${option.id}" name="${categoryKey}" 
+                    <label class="category-switch">
+                        <input type="checkbox" id="${option.id}" name="${categoryKey}" 
                                ${isSelected ? 'checked' : ''}
                                onchange="selectCategoryOption('${categoryKey}', '${option.id}')">
-                        <span class="radio-slider"></span>
+                        <span class="category-slider"></span>
                     </label>
                 </div>
             `;
