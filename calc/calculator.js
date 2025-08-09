@@ -38,7 +38,7 @@ const modifierCategories = {
             { id: "evolution_huge", name: "Huge", multiplier: 2 },
             { id: "evolution_goliath", name: "Goliath", multiplier: 2.5 }
         ],
-        default: "evolution_huge" // найкращий за замовчуванням
+        default: "evolution_goliath" // найкращий за замовчуванням
     },
     type: {
         title: "Type",
