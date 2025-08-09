@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadContent() {
     try {
+        // Правильний шлях до файлу
         const response = await fetch('index/content.html');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -12,17 +13,25 @@ async function loadContent() {
         const html = await response.text();
         document.getElementById('app-content').innerHTML = html;
         
-        // Викликаємо функцію ініціалізації після завантаження контенту
-        if (typeof initializeApp === 'function') {
-            initializeApp();
-        }
+        console.log('✅ Контент завантажено успішно');
+        
+        // Невелика затримка для повного завантаження DOM
+        setTimeout(() => {
+            if (typeof initializeApp === 'function') {
+                initializeApp();
+            } else {
+                console.error('❌ Функція initializeApp не знайдена');
+            }
+        }, 50);
+        
     } catch (error) {
-        console.error('Помилка завантаження контенту:', error);
+        console.error('❌ Помилка завантаження контенту:', error);
         // Fallback - показуємо повідомлення про помилку
         document.getElementById('app-content').innerHTML = `
             <div style="text-align: center; padding: 50px; color: red;">
                 <h2>Помилка завантаження</h2>
-                <p>Не вдалося завантажити контент додатка. Перевірте підключення до інтернету.</p>
+                <p>Не вдалося завантажити контент додатка.</p>
+                <p>Помилка: ${error.message}</p>
             </div>
         `;
     }
