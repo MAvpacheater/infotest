@@ -72,44 +72,88 @@ function initializeDefaults() {
 // Показ/приховування налаштувань
 function toggleSettings() {
     const panel = document.getElementById('settingsPanel');
+    const categoryPanel = document.getElementById('categoryPanel');
+    
     if (panel) {
         panel.classList.toggle('show');
+        // Ховаємо панель категорії при відкритті основних налаштувань
+        if (categoryPanel) {
+            categoryPanel.classList.remove('show');
+        }
     }
 }
 
-// Переключення категорії
-function toggleCategory(categoryKey) {
-    const header = document.querySelector(`[data-category="${categoryKey}"] .category-header`);
-    const content = document.querySelector(`[data-category="${categoryKey}"] .category-content`);
+// Показ панелі категорії
+function showCategoryPanel(categoryKey) {
+    const settingsPanel = document.getElementById('settingsPanel');
+    const categoryPanel = document.getElementById('categoryPanel');
     
-    if (header && content) {
-        header.classList.toggle('active');
-        content.classList.toggle('active');
+    if (settingsPanel && categoryPanel) {
+        settingsPanel.classList.remove('show');
+        categoryPanel.classList.add('show');
+        
+        // Заповнюємо панель категорії
+        createCategoryPanelHTML(categoryKey);
     }
 }
 
-// Обробка вибору в категорії (toggle switch логіка)
-function selectCategoryOption(categoryKey, optionId) {
-    const clickedInput = document.getElementById(optionId);
+// Повернення до основних налаштувань
+function backToSettings() {
+    const settingsPanel = document.getElementById('settingsPanel');
+    const categoryPanel = document.getElementById('categoryPanel');
     
-    // Якщо цей варіант вже обраний, не робимо нічого
-    if (currentSelections[categoryKey] === optionId && clickedInput.checked) {
-        return;
+    if (settingsPanel && categoryPanel) {
+        categoryPanel.classList.remove('show');
+        settingsPanel.classList.add('show');
+    }
+}
+
+// Створення HTML для панелі категорії
+function createCategoryPanelHTML(categoryKey) {
+    const categoryPanel = document.getElementById('categoryPanel');
+    if (!categoryPanel) return;
+    
+    const category = modifierCategories[categoryKey];
+    if (!category) return;
+    
+    let html = `
+        <div class="category-panel-header">
+            <div class="category-panel-title">${category.title}</div>
+            <button class="back-btn" onclick="backToSettings()">← Back</button>
+        </div>
+    `;
+    
+    for (const option of category.options) {
+        const isSelected = currentSelections[categoryKey] === option.id;
+        html += `
+            <div class="modifier-item">
+                <div class="modifier-label">
+                    <span>${option.name}</span>
+                    <span class="modifier-multiplier">(${option.multiplier}x)</span>
+                </div>
+                <label class="category-switch">
+                    <input type="checkbox" id="${option.id}" name="${categoryKey}" 
+                           ${isSelected ? 'checked' : ''}
+                           onchange="selectCategoryOption('${categoryKey}', '${option.id}')">
+                    <span class="category-slider"></span>
+                </label>
+            </div>
+        `;
     }
     
-    // Знімаємо всі чекбокси в цій категорії
-    const categoryInputs = document.querySelectorAll(`[data-category="${categoryKey}"] input[type="checkbox"]`);
-    categoryInputs.forEach(input => {
-        input.checked = false;
-    });
+    categoryPanel.innerHTML = html;
+}
+
+// Отримання назви обраного варіанту в категорії
+function getSelectedOptionName(categoryKey) {
+    const selectedId = currentSelections[categoryKey];
+    if (!selectedId) return 'None';
     
-    // Встановлюємо обраний
-    currentSelections[categoryKey] = optionId;
-    if (clickedInput) {
-        clickedInput.checked = true;
-    }
+    const category = modifierCategories[categoryKey];
+    if (!category) return 'None';
     
-    calculateStats();
+    const option = category.options.find(opt => opt.id === selectedId);
+    return option ? option.name : 'None';
 }
 
 // Обробка простих модифікаторів
@@ -175,6 +219,32 @@ function calculateStats() {
     resultSection.classList.add('show');
 }
 
+// Обробка вибору в категорії (toggle switch логіка)
+function selectCategoryOption(categoryKey, optionId) {
+    const clickedInput = document.getElementById(optionId);
+    
+    // Якщо цей варіант вже обраний, не робимо нічого
+    if (currentSelections[categoryKey] === optionId && clickedInput.checked) {
+        return;
+    }
+    
+    // Знімаємо всі чекбокси в панелі категорії
+    const categoryInputs = document.querySelectorAll(`#categoryPanel input[type="checkbox"]`);
+    categoryInputs.forEach(input => {
+        input.checked = false;
+    });
+    
+    // Встановлюємо обраний
+    currentSelections[categoryKey] = optionId;
+    if (clickedInput) {
+        clickedInput.checked = true;
+    }
+    
+    // Оновлюємо основну панель налаштувань
+    createSettingsHTML();
+    calculateStats();
+}
+
 // Створення HTML для налаштувань
 function createSettingsHTML() {
     const panel = document.getElementById('settingsPanel');
@@ -199,38 +269,19 @@ function createSettingsHTML() {
         `;
     }
     
-    // Категорії з підвкладками
+    // Кнопки категорій замість розгортання
     for (const [categoryKey, category] of Object.entries(modifierCategories)) {
+        const selectedName = getSelectedOptionName(categoryKey);
         html += `
-            <div class="category-section" data-category="${categoryKey}">
-                <div class="category-header" onclick="toggleCategory('${categoryKey}')">
-                    <span>${category.title}</span>
-                    <span class="category-arrow">▼</span>
-                </div>
-                <div class="category-content">
-        `;
-        
-        for (const option of category.options) {
-            const isSelected = currentSelections[categoryKey] === option.id;
-            html += `
-                <div class="modifier-item">
-                    <div class="modifier-label">
-                        <span>${option.name}</span>
-                        <span class="modifier-multiplier">(${option.multiplier}x)</span>
+            <button class="category-button" onclick="showCategoryPanel('${categoryKey}')">
+                <div class="category-button-content">
+                    <div>
+                        <div class="category-name">${category.title}</div>
+                        <div class="category-selected">Selected: ${selectedName}</div>
                     </div>
-                    <label class="category-switch">
-                        <input type="checkbox" id="${option.id}" name="${categoryKey}" 
-                               ${isSelected ? 'checked' : ''}
-                               onchange="selectCategoryOption('${categoryKey}', '${option.id}')">
-                        <span class="category-slider"></span>
-                    </label>
+                    <span class="category-arrow">→</span>
                 </div>
-            `;
-        }
-        
-        html += `
-                </div>
-            </div>
+            </button>
         `;
     }
     
