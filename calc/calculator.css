@@ -49,13 +49,65 @@
     padding: 25px;
     margin-bottom: 20px;
     text-align: left;
-    max-width: 600px;
+    max-width: 500px;
     width: 100%;
 }
 
 .settings-panel.show {
     display: block;
     animation: slideDown 0.3s ease-out;
+}
+
+/* Category Panel - окреме меню для підвкладок */
+.category-panel {
+    display: none;
+    background: rgba(246, 249, 252, 0.95);
+    border: 2px solid #e1ecf4;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: left;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.category-panel.show {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.category-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e1ecf4;
+}
+
+.category-panel-title {
+    color: #2c3e50;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.back-btn {
+    background: rgba(231, 76, 60, 0.1);
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #e74c3c;
+    color: white;
+    transform: translateY(-1px);
 }
 
 @keyframes slideDown {
@@ -77,49 +129,49 @@
     text-align: center;
 }
 
-/* Category Section */
-.category-section {
-    margin-bottom: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    min-width: 500px;
-}
-
-.category-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 12px 15px;
-    cursor: pointer;
+/* Category Button - замість розгортання */
+.category-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
     font-weight: 600;
+    font-size: 1.1em;
     transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
 }
 
-.category-header:hover {
+.category-button:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.category-button-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.category-name {
+    font-size: 1.1em;
+}
+
+.category-selected {
+    font-size: 0.9em;
+    opacity: 0.8;
 }
 
 .category-arrow {
     font-size: 1.2em;
-    transition: transform 0.3s ease;
-}
-
-.category-header.active .category-arrow {
-    transform: rotate(180deg);
-}
-
-.category-content {
-    max-height: 0;
-    overflow: hidden;
-    background: white;
-    transition: max-height 0.3s ease;
-}
-
-.category-content.active {
-    max-height: 500px;
 }
 
 /* Modifier Item */
@@ -253,7 +305,6 @@ input:checked + .slider:before {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    min-width: 500px;
 }
 
 .simple-modifier-label {
@@ -263,7 +314,6 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     gap: 3px;
-    flex: 1;
 }
 
 /* Input Section */
