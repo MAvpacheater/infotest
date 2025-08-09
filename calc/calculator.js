@@ -5,6 +5,7 @@ const modifierCategories = {
     slimes: {
         title: "Slimes",
         options: [
+            { id: "slime_normal", name: "Normal", multiplier: 1 },
             { id: "slime_yellow", name: "Yellow", multiplier: 1.2 },
             { id: "slime_blue", name: "Blue", multiplier: 1.4 },
             { id: "slime_purple", name: "Purple", multiplier: 1.65 },
@@ -21,6 +22,7 @@ const modifierCategories = {
     mutation: {
         title: "Mutation",
         options: [
+            { id: "mutation_normal", name: "Normal", multiplier: 1 },
             { id: "mutation_glowing", name: "Glowing", multiplier: 1.2 },
             { id: "mutation_rainbow", name: "Rainbow", multiplier: 1.35 },
             { id: "mutation_ghost", name: "Ghost", multiplier: 2 },
@@ -29,18 +31,19 @@ const modifierCategories = {
         default: "mutation_cosmic" // найкращий за замовчуванням
     },
     evolution: {
-        title: "Evolution and Size",
+        title: "Size",
         options: [
             { id: "evolution_baby", name: "Baby", multiplier: 1 },
             { id: "evolution_big", name: "Big", multiplier: 1.5 },
             { id: "evolution_huge", name: "Huge", multiplier: 2 },
-            { id: "evolution_goliath", name: "Goliath", multiplier: 1.25 }
+            { id: "evolution_goliath", name: "Goliath", multiplier: 2.5 }
         ],
         default: "evolution_huge" // найкращий за замовчуванням
     },
     type: {
         title: "Type",
         options: [
+            { id: "type_normal", name: "Normal", multiplier: 1 },
             { id: "type_golden", name: "Golden", multiplier: 1.5 },
             { id: "type_void", name: "Void", multiplier: 2 },
             { id: "type_pristine", name: "Pristine", multiplier: 2.17 }
@@ -224,7 +227,7 @@ function createSettingsHTML() {
             html += `
                 <div class="settings-header">
                     <div class="settings-title">${category.title}</div>
-                    <button class="back-btn" onclick="backToMainSettings()">← Back</button>
+                    <button type="button" class="back-btn" onclick="backToMainSettings(event)">← Back</button>
                 </div>
             `;
             
