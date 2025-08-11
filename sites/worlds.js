@@ -5,128 +5,128 @@ const worldsData = [
     {
         title: "World 0: Garden",
         icon: "🌳",
-        description: "The ultimate endgame world with the rarest pets and most challenging training.",
-        details: "Legendary Void creatures and Cosmic entities. The Void Chamber and Reality Rift offer the ultimate training experience for masters only."
+        description: "Weekly leadboard | Mail | Token store | Garden",
+        details: "To get here you need to open 3 worlds"
     },
     {
         title: "World 1: Spawn",
         icon: "🏠",
-        description: "The beginning of your adventure. A peaceful starting area with basic pets and simple training spots.",
-        details: "First pets: Dog, Cat, Rabbit. Training areas include the Tutorial Field and Beginner's Ground. Perfect place to learn game mechanics and start your collection."
+        description: "Event teleport | Index machine",
+        details: "Dont have permissinons"
     },
     {
         title: "World 2: Space Gym",
         icon: "🏋️",
-        description: "A magical realm filled with mythical creatures and enchanted forests.",
-        details: "Home to Dragons, Unicorns, and Phoenix pets. Features the Enchanted Grove and Magic Tower training spots. First world where you can find rare magical pets."
+        description: "Golden machine | Echant table",
+        details: "To advance to World 2, you need to defeat the 'Champion' and have 625 wins."
     },
     {
         title: "World 3: Beach",
         icon: "🌟",
-        description: "A futuristic cyberpunk world with robotic pets and high-tech training facilities.",
-        details: "Robot pets, Cyber Dogs, and AI companions await. Training in the Data Center and Cyber Gym provides unique technological boosts."
+        description: "Garden teleport |Tokens leadboard | Void machine | Trainers machine",
+        details: "To advance to World 3, you need to defeat the 'Rogue Ai' and have 10m wins."
     },
     {
         title: "World 4: Bunker",
         icon: "🟢",
-        description: "Sweet wonderland where everything is made of candy and sugar.",
-        details: "Candy Cats, Chocolate Dogs, and Gummy Bears roam freely. The Sugar Factory and Candy Castle offer delicious training experiences."
+        description: "Mutate machine | Cure Machine | ",
+        details: "To advance to World 4, you need to defeat the 'Kraken' and have 30b wins"
     },
     {
         title: "World 5: Dino",
         icon: "💀",
-        description: "Explore the cosmos with alien pets and zero-gravity training.",
-        details: "Alien creatures, Space Cats, and Cosmic Dogs. Train in the Space Station and Moon Base for out-of-this-world stats."
+        description: "Goliath machine",
+        details: "To advance to World 5, you need to defeat the 'Mutant King' and have 1.2qa wins"
     },
     {
         title: "World 6: Void",
         icon: "⭐",
-        description: "Tropical paradise with ocean pets and sandy training grounds.",
-        details: "Dolphins, Tropical Fish, and Beach Crabs. The Ocean Depths and Sandy Shore provide refreshing training environments."
+        description: "Aura machine",
+        details: "To advance to World 6, you need to defeat the 'Mamoth' and have 500qi wins"
     },
     {
         title: "World 7: Space Center",
         icon: "🌙 ",
-        description: "Haunted realm filled with ghostly pets and eerie training locations.",
-        details: "Ghost pets, Skeleton Dogs, and Vampire Cats lurk in the shadows. Train in the Haunted Mansion and Graveyard for spooky bonuses."
+        description: "Slime machine",
+        details: "To advance to World 7, you need to defeat the 'Ud'zal' and have 50sp wins"
     },
     {
         title: "World 8: Roman Empire",
         icon: "🗡️",
-        description: "Retro gaming world with 8-bit style pets and arcade training.",
-        details: "Pixel pets inspired by classic games. The Arcade Hall and Retro Zone offer nostalgic training with pixelated rewards."
+        description: "Forge machine",
+        details: "To advance to World 8, you need to defeat the 'Space Dog' and have 150oc wins"
     },
     {
         title: "World 9: Underworld",
         icon: "🔥",
-        description: "Victorian-era industrial world with mechanical pets and steam-powered training.",
-        details: "Clockwork animals and Steam-powered creatures. Train in the Gear Factory and Steam Workshop for mechanical advantages."
+        description: "Molten machine | Magma merchant",
+        details: "To advance to World 9, you need to defeat the 'Undead Sparta' and have 1.5d wins"
     },
     {
         title: "World 10: Magic Forest",
         icon: "🪄",
-        description: "Dense tropical jungle with exotic pets and natural training grounds.",
-        details: "Tigers, Parrots, and Monkeys swing through the trees. The Jungle Canopy and Ancient Ruins offer wild training experiences."
+        description: "Sorcerey | Magic Merchant",
+        details: "To advance to World 10, you need to defeat the 'Evil Overseer' and have 1tdc wins"
     },
     {
         title: "World 11: Showy Peaks",
         icon: "❄️",
-        description: "Frozen tundra with ice pets and cold-weather training facilities.",
-        details: "Polar Bears, Ice Dragons, and Snow Foxes. Train in the Ice Castle and Frozen Lake for chilling stat boosts."
+        description: "Frosty merchant",
+        details: "To advance to World 11, you need to defeat the 'Brute Killer' and have 50tdc wins"
     },
     {
         title: "World 12: Dusty Tawern",
         icon: "🌵",
-        description: "Vast desert with heat-resistant pets and sandy training spots.",
-        details: "Camels, Scorpions, and Desert Foxes. The Oasis and Sand Dunes provide hot training conditions for tough pets."
+        description: "Medal merchant | Cave fortune",
+        details: "To advance to World 12, you need to defeat the 'Glaciator' and have 1qt wins"
     },
     {
         title: "World 13: Lost Kingdom",
         icon: "⚔️",
-        description: "Deep ocean world with aquatic pets and underwater training facilities.",
-        details: "Sharks, Whales, and Sea Turtles. Train in the Deep Trench and Coral Reef for aquatic mastery and water-based bonuses."
+        description: "Wrestle trial | Orc merchant | Chest master",
+        details: "To advance to World 13, you need to defeat the 'Mr lizard' and have 50qt wins"
     },
     {
         title: "World 14: Orc Paradise",
         icon: "🍄",
-        description: "Floating islands in the sky with flying pets and aerial training grounds.",
-        details: "Flying pets like Eagles, Cloud Dragons, and Wind Spirits. The Sky Temple and Cloud Platform offer heavenly training."
+        description: "Paradise merchant | Vault goblin",
+        details: "To advance to World 14, you need to defeat the 'Shiny Knight' and have 200qt wins"
     },
     {
         title: "World 15: Heavenly Island",
         icon: "☁️",
-        description: "Volcanic world with fire pets and molten training environments.",
-        details: "Fire Dragons, Lava Hounds, and Phoenix pets. Train in the Volcano Core and Magma Pools for fiery stat increases."
+        description: "Divine fortune | Wrestle Trial",
+        details: "To advance to World 15, you need to defeat the 'Leader Orc' and have 1qd wins"
     },
     {
         title: "World 16: The Rift",
         icon: "⭐",
-        description: "Crystalline dimension with gem pets and sparkling training areas.",
-        details: "Crystal Cats, Diamond Dogs, and Ruby Birds. The Crystal Cave and Gem Mine offer precious training opportunities."
+        description: "Rift Cave | Rift machine | Rift leadboard",
+        details: "To advance to World 16, you need to defeat the 'Emprion' and have 5qd wins"
     },
     {
         title: "World 17: Matrix",
         icon: "💻",
-        description: "Shadow realm with dark pets and mysterious training locations.",
-        details: "Shadow creatures, Dark Knights, and Void pets. Train in the Shadow Temple and Dark Portal for mysterious powers."
+        description: "Matrix merchant | Matrix case",
+        details: "To advance to World 17, you need to defeat the 'Light Bringer'"
     },
     {
         title: "World 18: The Field",
         icon: "🏈",
-        description: "Colorful world with rainbow pets and vibrant training facilities.",
-        details: "Rainbow Unicorns, Colorful Birds, and Prism Cats. The Rainbow Bridge and Color Palace provide spectacular training."
+        description: "Super Wrestle",
+        details: "To advance to World 18, you need to defeat the 'Corrupt Guess'"
     },
     {
         title: "World 19: Magic Castle",
         icon: "🏰",
-        description: "High-energy world with electric pets and charged training stations.",
-        details: "Lightning pets, Electric Eels, and Thunder Birds. Train in the Power Plant and Lightning Rod for electrifying results."
+        description: "Pristine machine | Boost decoration",
+        details: "To advance to World 19, you need to defeat the 'Manager Mike'"
     },
     {
         title: "World 20: Sakura Temple",
         icon: "🌸",
-        description: "The ultimate endgame world with the rarest pets and most challenging training.",
-        details: "Legendary Void creatures and Cosmic entities. The Void Chamber and Reality Rift offer the ultimate training experience for masters only."
+        description: "Prestige shrine | Sakura fortune | Alchemist machine",
+        details: "To advance to World 20, you need to defeat the 'Flaming Reaper'"
     }
 ];
 
