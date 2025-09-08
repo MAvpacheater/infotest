@@ -4,6 +4,7 @@
 const trainerData = {
     free: [
         { name: "Overseer [1/12.5m]", description: "270%/405% Strength -- 91%/136.5% luck -- 94%/141% wins", type: "free" },
+        { name: "Mr Robot [1/1.5m]", description: "220%/330% Strength -- 71%/106,5% luck -- 77%/115.5% wins", type: "free" },
         { name: "Pirate Peanguin [1/500k]", description: "205%/307.5% Strength -- 65%/97,5% luck -- 69%/103.5% wins", type: "free" },
         { name: "Princes [1/150k]", description: "190%/285% Strength -- 59%/88.5% luck -- 61%/91.5% wins", type: "free" },
         { name: "Sensei [1/100k]", description: "180%/270% Strength -- 56%/84% luck -- 58%/87% wins", type: "free" },
@@ -11,7 +12,11 @@ const trainerData = {
         { name: "Vampire [1/50k]", description: "145%/217.5% Strength -- 50%/75% luck -- 52%/78% wins", type: "free" }
     ],
     donate: [
+        { name: "Pharoah", description: "320%/480% Strength -- 129%%/193.5% luck -- 139%/208.5% wins", type: "donate" },
+        { name: "Tung Tung Tung Sahur", description: "300%/450% Strength -- 118%%/177% luck -- 128%/192% wins", type: "donate" },
         { name: "Manager guard", description: "280%/420% Strength -- 108%/162% luck -- 118%/177% wins", type: "donate" },
+        { name: "Octo guard", description: "270%/405% Strength -- 98%/147% luck -- 108%/162% wins", type: "donate" },
+        { name: "Frontman", description: "260%/390% Strength -- 98%/147% luck -- 108%/162% wins", type: "donate" },
         { name: "Island surfer", description: "250%/375% Strength -- 95%/142.5% luck -- 20%/30% wins", type: "donate" },
         { name: "Surfer Jake", description: "240%/360% Strength -- 85%/127.5% luck -- 95%/142.5% wins", type: "donate" },
         { name: "Shrine Master", description: "230%/345% Strength -- 77%/115.5% luck -- 85%/127.5% wins", type: "donate" },
