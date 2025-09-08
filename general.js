@@ -1,6 +1,6 @@
-// Enhanced General JavaScript functions with auth integration and profile support
+// General JavaScript functions - cleaned version without authentication
 
-// Page switching functionality - enhanced with profile support
+// Page switching functionality
 function switchPage(page) {
     console.log(`Switching to page: ${page}`);
     
@@ -19,8 +19,6 @@ function switchPage(page) {
     
     // Update active nav button
     const pageMap = {
-        'login': -1,        // Special case - no nav button
-        'profile': -1,      // Special case - no nav button (opened via nickname click)
         'calculator': 0,
         'arm': 1,
         'grind': 2,
@@ -47,23 +45,19 @@ function switchPage(page) {
     // Trigger page-specific initialization if needed
     initializePageContent(page);
     
-    // Load user settings for calculators if user is authenticated
-    loadUserSettingsForPage(page);
+    // Load settings from localStorage
+    loadSettingsForPage(page);
 }
 
-// Load user settings for specific page
-async function loadUserSettingsForPage(page) {
-    if (!window.authManager || !window.authManager.currentUser) {
-        return; // No user authenticated
-    }
-    
+// Load settings from localStorage for specific page
+function loadSettingsForPage(page) {
     const calculatorPages = ['calculator', 'arm', 'grind'];
     if (!calculatorPages.includes(page)) {
         return; // Not a calculator page
     }
     
     try {
-        const settings = await window.authManager.loadCalculatorSettings(page);
+        const settings = loadSettingsFromStorage(page);
         if (settings) {
             console.log(`✅ Loaded settings for ${page}:`, settings);
             applySettingsToPage(page, settings);
@@ -94,37 +88,9 @@ function applySettingsToPage(page, settings) {
     }
 }
 
-// Save user settings for page
-async function saveUserSettingsForPage(page, settings) {
-    if (!window.authManager || !window.authManager.currentUser) {
-        // Fallback to localStorage if not authenticated
-        localStorage.setItem(`armHelper_${page}_settings`, JSON.stringify(settings));
-        return;
-    }
-    
-    try {
-        await window.authManager.saveCalculatorSettings(page, settings);
-        console.log(`✅ Settings saved for ${page}`);
-    } catch (error) {
-        console.error(`❌ Error saving settings for ${page}:`, error);
-        // Fallback to localStorage
-        localStorage.setItem(`armHelper_${page}_settings`, JSON.stringify(settings));
-    }
-}
-
-// Initialize specific page content when switching - WITH PROFILE SUPPORT
+// Initialize specific page content when switching
 function initializePageContent(page) {
     switch(page) {
-        case 'login':
-            if (typeof initializeAuth === 'function') {
-                initializeAuth();
-            }
-            break;
-        case 'profile':
-            if (typeof initializeProfile === 'function') {
-                initializeProfile();
-            }
-            break;
         case 'calculator':
             if (typeof initializeCalculator === 'function') {
                 initializeCalculator();
@@ -199,103 +165,12 @@ function closeSidebar() {
     }
 }
 
-// Enhanced auth action handler
-function handleAuthAction() {
-    const authButton = document.getElementById('authButton');
-    
-    if (authButton && authButton.classList.contains('logout-btn')) {
-        // User is logged in, handle logout
-        if (window.authManager) {
-            window.authManager.signOut();
-        } else if (typeof logout === 'function') {
-            logout();
-        }
-    } else {
-        // User is not logged in, go to login page
-        switchPage('login');
-    }
-}
-
-// Update sidebar user info - enhanced for Supabase integration
-function updateSidebarUserInfo(user = null) {
-    const userInfo = document.getElementById('userInfo');
-    const authButton = document.getElementById('authButton');
-    const sidebarUserNickname = document.getElementById('sidebarUserNickname');
-    
-    if (userInfo && authButton) {
-        if (user) {
-            // User is logged in
-            userInfo.style.display = 'block';
-            authButton.textContent = 'Sign Out';
-            authButton.classList.add('logout-btn');
-            
-            if (sidebarUserNickname) {
-                sidebarUserNickname.textContent = user.nickname || 
-                                                 user.email?.split('@')[0] || 
-                                                 'User';
-                // Ensure profile click handler is set
-                sidebarUserNickname.onclick = () => {
-                    if (typeof openProfile === 'function') {
-                        openProfile();
-                    } else {
-                        console.error('openProfile function not found');
-                    }
-                };
-            }
-            
-            console.log('✅ Sidebar updated with user info (profile clickable)');
-        } else {
-            // User is not logged in
-            userInfo.style.display = 'none';
-            authButton.textContent = 'Login';
-            authButton.classList.remove('logout-btn');
-            
-            console.log('✅ Sidebar updated for guest user');
-        }
-    }
-}
-
-// Check and update user status - enhanced
-function checkUserStatus() {
-    // Check if Supabase auth manager is available
-    if (window.authManager && window.authManager.currentUser) {
-        const profile = window.authManager.userProfile;
-        const user = profile || {
-            nickname: window.authManager.currentUser.email?.split('@')[0] || 'User',
-            email: window.authManager.currentUser.email
-        };
-        updateSidebarUserInfo(user);
-    } else {
-        // Fallback to localStorage
-        const savedUser = localStorage.getItem('armHelper_currentUser');
-        if (savedUser) {
-            try {
-                const user = JSON.parse(savedUser);
-                updateSidebarUserInfo(user);
-            } catch (e) {
-                console.warn('Invalid saved user data');
-                localStorage.removeItem('armHelper_currentUser');
-                updateSidebarUserInfo(null);
-            }
-        } else {
-            updateSidebarUserInfo(null);
-        }
-    }
-}
-
 // Settings persistence helpers
 function saveSettingsToStorage(key, settings) {
-    if (window.authManager && window.authManager.currentUser) {
-        // Save to Supabase if authenticated
-        saveUserSettingsForPage(key, settings);
-    } else {
-        // Fallback to localStorage
-        localStorage.setItem(`armHelper_${key}_settings`, JSON.stringify(settings));
-    }
+    localStorage.setItem(`armHelper_${key}_settings`, JSON.stringify(settings));
 }
 
 function loadSettingsFromStorage(key) {
-    // Try localStorage first for immediate response
     const localSettings = localStorage.getItem(`armHelper_${key}_settings`);
     if (localSettings) {
         try {
@@ -304,55 +179,34 @@ function loadSettingsFromStorage(key) {
             console.warn('Invalid local settings data');
         }
     }
-    
-    // If authenticated, settings will be loaded asynchronously via loadUserSettingsForPage
     return null;
 }
 
-// Прапорець для запобігання повторної ініціалізації
+// App initialization flag
 let appInitialized = false;
 
-// Головна функція ініціалізації - WITH PROFILE SUPPORT
+// Main initialization function
 function initializeApp() {
     if (typeof appInitialized !== 'undefined' && appInitialized) {
-        console.log('⚠️ Додаток вже ініціалізовано');
+        console.log('⚠️ App already initialized');
         return;
     }
     
-    console.log('🚀 Початок ініціалізації додатка...');
+    console.log('🚀 Starting app initialization...');
     
-    // Перевіряємо чи контент завантажився
+    // Check if content is loaded
     const appContent = document.getElementById('app-content');
     if (!appContent || !appContent.innerHTML.trim()) {
-        console.error('❌ Контент не завантажено');
+        console.error('❌ Content not loaded');
         return;
     }
     
-    // Initialize auth system first
-    if (typeof initializeAuth === 'function') {
-        initializeAuth();
-    }
-    
-    // Check user status and update sidebar
-    setTimeout(() => {
-        checkUserStatus();
-    }, 200);
-    
-    // Determine starting page based on auth status
-    let startingPage = 'calculator'; // Default to calculator
-    
-    // Check if we should show login page
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('page') === 'login') {
-        startingPage = 'login';
-    }
-    
-    // Make sure starting page is active
-    switchPage(startingPage);
+    // Start with calculator page
+    switchPage('calculator');
     
     // Enhanced click outside settings panel handler
     document.addEventListener('click', e => {
-        // Закриваємо панелі налаштувань при кліку поза ними
+        // Close settings panels when clicking outside
         const settingsPanels = [
             { panel: document.getElementById('settingsPanel'), btn: document.querySelector('#calculatorPage .settings-btn') },
             { panel: document.getElementById('settingsPanelArm'), btn: document.querySelector('#armPage .settings-btn') },
@@ -380,44 +234,17 @@ function initializeApp() {
     // Initialize all modules
     initializeAllModules();
     
-    // Set up auth event listeners
-    setupAuthEventListeners();
-    
-    // Set the flag AFTER initialization
+    // Set initialization flag
     if (typeof window !== 'undefined') {
         window.appInitialized = true;
     }
     appInitialized = true;
-    console.log('✅ Ініціалізація додатка завершена');
+    console.log('✅ App initialization completed');
 }
 
-// Setup authentication event listeners
-function setupAuthEventListeners() {
-    // Listen for authentication events
-    document.addEventListener('userAuthenticated', (event) => {
-        console.log('🔐 User authenticated event received');
-        const { user, profile } = event.detail;
-        updateSidebarUserInfo(profile || user);
-        
-        // Load settings for current page
-        const activePage = document.querySelector('.page.active');
-        if (activePage) {
-            const pageId = activePage.id.replace('Page', '');
-            loadUserSettingsForPage(pageId);
-        }
-    });
-    
-    document.addEventListener('userSignedOut', () => {
-        console.log('👋 User signed out event received');
-        updateSidebarUserInfo(null);
-    });
-}
-
-// Ініціалізація всіх модулів - WITH PROFILE SUPPORT
+// Initialize all modules
 function initializeAllModules() {
     const modules = [
-        'initializeAuth',
-        'initializeProfile',  // Add profile initialization
         'initializeCalculator',
         'initializeArm', 
         'initializeGrind',
@@ -426,19 +253,20 @@ function initializeAllModules() {
         'initializeAura',
         'initializeTrainer',
         'initializeCharms',
-        'initializeWorlds'
+        'initializeWorlds',
+        'initializeCodes'
     ];
 
     modules.forEach(moduleName => {
         if (typeof window[moduleName] === 'function') {
             try {
                 window[moduleName]();
-                console.log(`✅ ${moduleName} ініціалізовано`);
+                console.log(`✅ ${moduleName} initialized`);
             } catch (error) {
-                console.error(`❌ Помилка ініціалізації ${moduleName}:`, error);
+                console.error(`❌ Error initializing ${moduleName}:`, error);
             }
         } else {
-            console.warn(`⚠️ Функція ${moduleName} не знайдена`);
+            console.warn(`⚠️ Function ${moduleName} not found`);
         }
     });
 }
@@ -452,52 +280,11 @@ function debugPageStates() {
     console.log('========================');
 }
 
-// Enhanced logout function
-function logout() {
-    if (window.authManager) {
-        window.authManager.signOut();
-    } else {
-        // Fallback for localStorage
-        localStorage.removeItem('armHelper_currentUser');
-        updateSidebarUserInfo(null);
-        console.log('✅ Logged out (localStorage cleared)');
-    }
-}
-
-// Utility function to get current user
-function getCurrentUser() {
-    if (window.authManager && window.authManager.currentUser) {
-        return {
-            auth: window.authManager.currentUser,
-            profile: window.authManager.userProfile
-        };
-    }
-    
-    // Fallback to localStorage
-    const savedUser = localStorage.getItem('armHelper_currentUser');
-    if (savedUser) {
-        try {
-            return { profile: JSON.parse(savedUser) };
-        } catch (e) {
-            return null;
-        }
-    }
-    
-    return null;
-}
-
 // Make functions globally available
 window.switchPage = switchPage;
 window.toggleMobileMenu = toggleMobileMenu;
 window.closeSidebar = closeSidebar;
-window.handleAuthAction = handleAuthAction;
-window.updateSidebarUserInfo = updateSidebarUserInfo;
-window.checkUserStatus = checkUserStatus;
 window.initializeApp = initializeApp;
-window.logout = logout;
 window.debugPageStates = debugPageStates;
 window.saveSettingsToStorage = saveSettingsToStorage;
 window.loadSettingsFromStorage = loadSettingsFromStorage;
-window.getCurrentUser = getCurrentUser;
-window.saveUserSettingsForPage = saveUserSettingsForPage;
-window.loadUserSettingsForPage = loadUserSettingsForPage;
